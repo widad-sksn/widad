@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Widad | Network Engineering, DevOps &amp; Cybersecurity</title>
+
+  <!-- Favicon Logo W -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        container: {
+          center: true,
+          padding: '16px',
+        },
+        extend: {
+          colors: {
+            primary: '#0284c7',   /* sky-600 */
+            accent: '#38bdf8',    /* sky-400 */
+            accentblue: '#2563eb',/* blue-600 */
+            dark: '#0f172a',      /* modern rich slate, not pitch black */
+            darker: '#0b1120',
+            surface: '#1e293b',   /* solid slate-800 card */
+            surfacecard: '#1e293b',
+            secondary: '#94a3b8', /* slate-400 */
+          },
+          screens: {
+            '2xl': '1320px',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Custom Styles: Shadows, Animations & Gliding Cards -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      overflow-x: hidden;
+    }
+
+    /* Subtle Technical Grid Background (Replaces Bubbles) */
+    .tech-grid-bg {
+      background-color: #0f172a;
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 9px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 5px;
+      border: 2px solid #0f172a;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0284c7;
+    }
+
+    /* Hero Portrait Realistic Shadow & Blue Ambient Glow */
+    .hero-avatar {
+      filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.75))
+              drop-shadow(0 0 50px rgba(56, 189, 248, 0.3));
+      transition: filter 0.4s ease, transform 0.4s ease;
+    }
+    .hero-avatar:hover {
+      filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.85))
+              drop-shadow(0 0 65px rgba(56, 189, 248, 0.45));
+      transform: translateY(-4px) scale(1.01);
+    }
+
+    /* Floating Pill Navigation on Scroll */
+    .nav-scrolled {
+      background-color: rgba(15, 23, 42, 0.92) !important;
+      border-color: rgba(56, 189, 248, 0.35) !important;
+      box-shadow: 0 15px 35px -5px rgba(2, 132, 199, 0.25), 0 10px 20px -5px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    /* Hamburger Lines */
+    .hamburger-line {
+      margin-top: 0.4rem;
+      margin-bottom: 0.4rem;
+      display: block;
+      height: 2px;
+      width: 26px;
+      background-color: #38bdf8;
+      transition: all 0.3s ease-in-out;
+    }
+    .hamburger-active > span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger-active > span:nth-child(2) {
+      opacity: 0;
+      transform: scale(0);
+    }
+    .hamburger-active > span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Infinite Gliding Cards Marquee */
+    @keyframes marqueeScroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 35s linear infinite;
+    }
+    .marquee-container:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    /* Staggered Scroll-Reveal Gliding Cards with Solid Opaque Background */
+    .glide-card {
+      background-color: #151f32 !important;
+      border: 1px solid #334155 !important;
+      box-shadow: 0 10px 25px -5px rgba(2, 6, 23, 0.7);
+      opacity: 0;
+      transform: translateY(36px) scale(0.98);
+      transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.35s ease,
+                  box-shadow 0.35s ease;
+      will-change: opacity, transform;
+    }
+    .glide-card.revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Card Glow Hover */
+    .card-hover-glow {
+      transition: all 0.3s ease;
+    }
+    .card-hover-glow:hover {
+      transform: translateY(-5px) scale(1.008);
+      border-color: rgba(56, 189, 248, 0.7) !important;
+      box-shadow: 0 16px 32px -5px rgba(2, 132, 199, 0.3);
+    }
+
+    /* Typewriter Cursor */
+    .typing-cursor {
+      border-right: 2.5px solid #38bdf8;
+      animation: cursorBlink 0.75s step-end infinite;
+      display: inline-block;
+      padding-right: 2px;
+    }
+
+    /* High-Tech Animated Project Visuals */
+    @keyframes radarSweep {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes dashFlow {
+      to { stroke-dashoffset: -24; }
+    }
+    @keyframes cursorBlink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    @keyframes vmFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes ledPulse {
+      0%, 100% { opacity: 0.35; }
+      50% { opacity: 1; }
+    }
+    .anim-radar {
+      animation: radarSweep 3.5s linear infinite;
+      transform-origin: center;
+    }
+    .anim-dash {
+      stroke-dasharray: 5 5;
+      animation: dashFlow 1.2s linear infinite;
+    }
+    .anim-cursor {
+      animation: cursorBlink 0.85s infinite;
+    }
+    .anim-vm {
+      animation: vmFloat 2.8s ease-in-out infinite;
+    }
+    .anim-led {
+      animation: ledPulse 1.2s ease-in-out infinite;
+    }
+
+    /* Floating Side Badges Keyframes */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-7px); }
+    }
+    @keyframes floatSlowReverse {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(7px); }
+    }
+    .anim-float-1 {
+      animation: floatSlow 4.4s ease-in-out infinite;
+    }
+    .anim-float-2 {
+      animation: floatSlowReverse 5.2s ease-in-out infinite 0.8s;
+    }
+    .anim-float-3 {
+      animation: floatSlow 4.8s ease-in-out infinite 1.6s;
+    }
+
+    /* Preloader Scanline & Seam Pulse Keyframe */
+    .terminal-scanline {
+      background: linear-gradient(to bottom, transparent 50%, rgba(56, 189, 248, 0.035) 51%);
+      background-size: 100% 4px;
+    }
+    @keyframes seamGlow {
+      0%, 100% { opacity: 0.5; box-shadow: 0 0 12px rgba(56, 189, 248, 0.5); }
+      50% { opacity: 1; box-shadow: 0 0 28px rgba(56, 189, 248, 0.95); }
+    }
+    .anim-seam {
+      animation: seamGlow 1.2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="relative antialiased selection:bg-sky-500 selection:text-white overflow-x-hidden w-full max-w-full tech-grid-bg bg-slate-900 text-slate-100">
+
+  <!-- Futuristic Cyber Vault Terminal Preloader Start -->
+  <div id="preloader" class="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden select-none pointer-events-auto">
+    <!-- Top Pneumatic Shutter Door -->
+    <div id="door-top" class="absolute top-0 left-0 right-0 h-1/2 bg-slate-950 border-b border-sky-500/40 transition-transform duration-700 ease-in-out z-10 flex items-end justify-center">
+      <div id="door-seam-top" class="w-full h-[2px] bg-gradient-to-r from-transparent via-sky-400 to-transparent anim-seam"></div>
+    </div>
+
+    <!-- Bottom Pneumatic Shutter Door -->
+    <div id="door-bottom" class="absolute bottom-0 left-0 right-0 h-1/2 bg-slate-950 border-t border-sky-500/40 transition-transform duration-700 ease-in-out z-10 flex items-start justify-center">
+      <div id="door-seam-bottom" class="w-full h-[2px] bg-gradient-to-r from-transparent via-sky-400 to-transparent anim-seam"></div>
+    </div>
+
+    <!-- Central Hacker Terminal Console -->
+    <div id="terminal-console" class="relative z-20 w-full max-w-[92%] sm:max-w-lg mx-auto bg-slate-900/95 border border-sky-500/50 rounded-xl shadow-[0_0_60px_rgba(56,189,248,0.3)] backdrop-blur-md overflow-hidden transition-all duration-500">
+      
+      <!-- Terminal Header / Titlebar -->
+      <div class="flex items-center justify-between px-3.5 py-2.5 bg-slate-950/90 border-b border-slate-800">
+        <div class="flex items-center gap-1.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-500 inline-block shadow-sm shadow-red-500/50"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block shadow-sm shadow-amber-500/50"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block shadow-sm shadow-emerald-500/50"></span>
+        </div>
+        <div class="flex items-center gap-1.5 font-mono text-[10px] sm:text-xs text-slate-300 font-medium">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-ping"></span>
+          <span>widad@devops-cluster:~ (bash)</span>
+        </div>
+        <div class="font-mono text-[9px] text-sky-400/90 hidden sm:block font-semibold">
+          PORT: 22 [SSH-2.0]
+        </div>
+      </div>
+
+      <!-- Terminal Body / Log Stream -->
+      <div class="p-4 sm:p-5 font-mono text-[11px] sm:text-xs leading-relaxed text-slate-300 min-h-[175px] sm:min-h-[190px] flex flex-col justify-center terminal-scanline space-y-1.5">
+        <div id="term-line-1" class="text-sky-300 flex items-center gap-2">
+          <span class="text-slate-500 font-bold">$</span>
+          <span>./init_system.sh --target=widad-portfolio</span>
+        </div>
+        <div id="term-line-2" class="opacity-0 transition-opacity duration-200 text-slate-400">
+          <span class="text-emerald-400 font-bold">[✔]</span> Proxmox VE 8.1: Cluster Quorum Established
+        </div>
+        <div id="term-line-3" class="opacity-0 transition-opacity duration-200 text-slate-400">
+          <span class="text-emerald-400 font-bold">[✔]</span> WireGuard VPN: Handshake Active (10.8.0.1)
+        </div>
+        <div id="term-line-4" class="opacity-0 transition-opacity duration-200 text-slate-400">
+          <span class="text-emerald-400 font-bold">[✔]</span> MikroTik RouterOS: Routing &amp; ACLs Loaded
+        </div>
+        <div id="term-line-5" class="opacity-0 transition-opacity duration-200 text-cyan-300 font-semibold flex items-center gap-1.5">
+          <span class="text-sky-400 font-bold">[ACCESS GRANTED]</span>
+          <span>Opening Vault Doors...</span>
+          <span class="inline-block w-2 h-3.5 bg-sky-400 anim-cursor ml-1"></span>
+        </div>
+      </div>
+
+      <!-- Terminal Footer Status Bar -->
+      <div class="px-4 py-2 bg-slate-950/80 border-t border-slate-800/80 flex items-center justify-between font-mono text-[10px] text-slate-400">
+        <span class="text-slate-500">SESSION: ID-7749</span>
+        <span id="term-status-badge" class="text-sky-400 font-semibold">BOOTING...</span>
+      </div>
+    </div>
+  </div>
+  <!-- Futuristic Cyber Vault Terminal Preloader End -->
+
+  <!-- Modern Floating Pill Navbar Start -->
+  <header class="fixed top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-4 transition-all duration-300 pointer-events-none">
+    <nav id="navbar-pill" class="pointer-events-auto bg-slate-900 border border-slate-700/80 shadow-[0_10px_25px_rgba(0,0,0,0.5)] rounded-full px-4 sm:px-5 py-2 flex items-center justify-between lg:justify-center gap-3 sm:gap-6 transition-all duration-300 w-full max-w-[94%] sm:max-w-md lg:max-w-none lg:w-auto">
+      
+      <!-- Mobile Only Brand Logo: widad (no dot) -->
+      <a href="#home" class="block lg:hidden font-extrabold text-base text-white tracking-wider group">
+        <span class="group-hover:text-sky-400 transition duration-300">widad</span>
+      </a>
+
+      <!-- Desktop Nav Items: widad Centered between Skills and Portfolio (Balanced Equal Widths) -->
+      <div class="hidden lg:flex items-center">
+        <!-- Left Link Group -->
+        <div class="flex items-center justify-end space-x-1 min-w-[285px]">
+          <a href="#home" class="text-sm font-medium text-slate-300 hover:text-white hover:bg-sky-500/15 px-3.5 py-1.5 rounded-full transition duration-200">Beranda</a>
+          <a href="#about" class="text-sm font-medium text-slate-300 hover:text-white hover:bg-sky-500/15 px-3.5 py-1.5 rounded-full transition duration-200">Tentang</a>
+          <a href="#marquee" class="text-sm font-medium text-slate-300 hover:text-white hover:bg-sky-500/15 px-3.5 py-1.5 rounded-full transition duration-200">Skills</a>
+        </div>
+        
+        <!-- Center Brand: widad (Dead Center, No Dot) -->
+        <a href="#home" class="font-black text-base text-white tracking-wider px-4 py-1 mx-3 group flex items-center rounded-full bg-slate-800/90 border border-slate-700/80 hover:border-sky-500/50 shadow-sm transition duration-300">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-400 group-hover:from-sky-300 group-hover:to-blue-300 transition duration-300 font-black">widad</span>
+        </a>
+
+        <!-- Right Link Group -->
+        <div class="flex items-center justify-start space-x-1 min-w-[285px]">
+          <a href="#portfolio" class="text-sm font-medium text-slate-300 hover:text-white hover:bg-sky-500/15 px-3.5 py-1.5 rounded-full transition duration-200">Portfolio</a>
+          <a href="#pengalaman" class="text-sm font-medium text-slate-300 hover:text-white hover:bg-sky-500/15 px-3.5 py-1.5 rounded-full transition duration-200">Pengalaman</a>
+          <a href="#contact" class="text-sm font-medium text-slate-300 hover:text-white hover:bg-sky-500/15 px-3.5 py-1.5 rounded-full transition duration-200">Kontak</a>
+        </div>
+      </div>
+
+      <!-- Hamburger Button (Mobile) -->
+      <button id="hamburger" type="button" class="block lg:hidden focus:outline-none p-1 text-slate-300" aria-label="Toggle Menu">
+        <span class="hamburger-line origin-top-left"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line origin-bottom-left"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="nav-menu" class="hidden pointer-events-auto absolute top-16 left-4 right-4 max-w-sm mx-auto bg-slate-900/95 backdrop-blur-2xl border border-sky-500/30 rounded-xl shadow-2xl p-5 z-50 lg:hidden">
+      <ul class="space-y-2">
+        <li><a href="#home" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Beranda</a></li>
+        <li><a href="#about" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Tentang</a></li>
+        <li><a href="#marquee" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Skills Ticker</a></li>
+        <li><a href="#portfolio" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Portfolio</a></li>
+        <li><a href="#pengalaman" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Pengalaman</a></li>
+        <li><a href="#contact" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Kontak</a></li>
+      </ul>
+    </div>
+  </header>
+  <!-- Modern Floating Pill Navbar End -->
+
+  <!-- Hero Section Start -->
+  <section id="home" class="relative z-10 pt-28 pb-16 lg:pt-36 lg:pb-28">
+    <div class="container max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-10">
+        
+        <!-- Hero Text: Shifted Comfortably Inward Toward Center -->
+        <div class="w-full lg:w-1/2 order-2 lg:order-1 text-center lg:text-left flex flex-col items-center lg:items-start lg:pl-6 xl:pl-10">
+          <!-- Role Badge -->
+          <div class="inline-flex items-center gap-2 py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs sm:text-sm font-semibold mb-3 sm:mb-4 shadow-sm">
+            Network Engineering | DevOps | Cybersecurity
+          </div>
+
+          <h1 class="text-sm font-semibold text-sky-400 md:text-xl">
+            Halo Semua 👋, Saya 
+            <span class="block font-black text-white text-3xl sm:text-4xl lg:text-5xl mt-1 tracking-tight drop-shadow-sm">
+              Ahmad Widad
+            </span>
+          </h1>
+
+          <h2 class="font-medium text-slate-300 text-sm sm:text-lg lg:text-xl mb-3 sm:mb-4 mt-2 leading-snug">
+            Fokus pada <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-400 font-bold">Network Engineering, DevOps &amp; Cybersecurity</span>
+            <span class="block text-slate-400 text-xs sm:text-sm lg:text-base font-normal mt-1">Linux Server Architecture, Cloud Infrastructure &amp; Security Hardening</span>
+          </h2>
+
+          <p class="font-normal text-slate-300 mb-6 lg:mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0 text-xs sm:text-sm lg:text-base">
+            Merancang infrastruktur jaringan berkinerja tinggi, klaster virtualisasi Proxmox, otomatisasi container Docker, konfigurasi routing &amp; firewall MikroTik, serta implementasi pertahanan keamanan sistem modern.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+            <a href="#contact" class="text-xs sm:text-sm lg:text-base font-semibold text-white bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 py-2.5 px-5 sm:py-3 sm:px-7 rounded-xl shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:-translate-y-0.5 transition duration-300 ease-in-out inline-flex items-center gap-2">
+              <span>Hubungi Saya</span>
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </a>
+            <a href="#portfolio" class="text-xs sm:text-sm lg:text-base font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-sky-500/40 py-2.5 px-5 sm:py-3 sm:px-6 rounded-xl transition duration-300 ease-in-out inline-block">
+              Lihat Proyek
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Photo: Frameless Natural Cutout Framed with Tech Floating Badges -->
+        <div class="w-full lg:w-1/2 order-1 lg:order-2 flex justify-center">
+          <div class="relative flex flex-col items-center justify-center w-full max-w-[280px] sm:max-w-[360px] lg:max-w-[430px] mx-auto py-2 sm:py-4">
+            
+            <!-- Soft Ambient Backlight Glow -->
+            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-sky-500/20 via-blue-600/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+
+            <!-- Concentric Decorative Tech Orbit Rings -->
+            <div class="absolute w-60 h-60 sm:w-72 sm:h-72 lg:w-88 lg:h-88 rounded-full border border-sky-500/15 pointer-events-none -z-10"></div>
+            <div class="absolute w-72 h-72 sm:w-88 sm:h-88 lg:w-[410px] lg:h-[410px] rounded-full border border-dashed border-slate-700/60 pointer-events-none -z-10"></div>
+
+            <!-- Floating Badge 1 (Top-Left): Linux Server -->
+            <div class="anim-float-1 absolute -left-2 sm:-left-6 lg:-left-10 top-4 sm:top-8 z-20 bg-slate-900/95 border border-slate-700/90 hover:border-amber-500/50 px-2 py-1 sm:px-3 sm:py-1.5 rounded-xl shadow-xl flex items-center gap-1.5 sm:gap-2.5 backdrop-blur-md transition-all">
+              <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="4 17 10 11 4 5"></polyline>
+                  <line x1="12" y1="19" x2="20" y2="19"></line>
+                </svg>
+              </div>
+              <div class="text-left">
+                <div class="flex items-center gap-1 sm:gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <p class="text-[9px] sm:text-xs font-bold text-white tracking-wide">Linux Server</p>
+                </div>
+                <p class="text-[7.5px] sm:text-[9px] text-slate-400 font-mono">Ubuntu • Docker</p>
+              </div>
+            </div>
+
+            <!-- Floating Badge 2 (Bottom-Left): WireGuard VPN -->
+            <div class="anim-float-2 absolute -left-4 sm:-left-8 lg:-left-12 bottom-12 sm:bottom-16 z-20 bg-slate-900/95 border border-slate-700/90 hover:border-sky-500/50 px-2 py-1 sm:px-3 sm:py-1.5 rounded-xl shadow-xl flex items-center gap-1.5 sm:gap-2.5 backdrop-blur-md transition-all">
+              <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 shrink-0">
+                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <div class="text-left">
+                <div class="flex items-center gap-1 sm:gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+                  <p class="text-[9px] sm:text-xs font-bold text-white tracking-wide">WireGuard</p>
+                </div>
+                <p class="text-[7.5px] sm:text-[9px] text-sky-400 font-mono">Encrypted Tunnel</p>
+              </div>
+            </div>
+
+            <!-- Floating Badge 3 (Top-Right): Proxmox VE -->
+            <div class="anim-float-3 absolute -right-2 sm:-right-6 lg:-right-10 top-6 sm:top-10 z-20 bg-slate-900/95 border border-slate-700/90 hover:border-orange-500/50 px-2 py-1 sm:px-3 sm:py-1.5 rounded-xl shadow-xl flex items-center gap-1.5 sm:gap-2.5 backdrop-blur-md transition-all">
+              <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-orange-500/15 border border-orange-500/30 flex items-center justify-center text-orange-400 shrink-0">
+                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                  <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                  <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                </svg>
+              </div>
+              <div class="text-left">
+                <div class="flex items-center gap-1 sm:gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <p class="text-[9px] sm:text-xs font-bold text-white tracking-wide">Proxmox VE</p>
+                </div>
+                <p class="text-[7.5px] sm:text-[9px] text-slate-400 font-mono">HA Virtualization</p>
+              </div>
+            </div>
+
+            <!-- Floating Badge 4 (Bottom-Right): MikroTik RouterOS -->
+            <div class="anim-float-1 absolute -right-4 sm:-right-8 lg:-right-12 bottom-12 sm:bottom-16 z-20 bg-slate-900/95 border border-slate-700/90 hover:border-cyan-500/50 px-2 py-1 sm:px-3 sm:py-1.5 rounded-xl shadow-xl flex items-center gap-1.5 sm:gap-2.5 backdrop-blur-md transition-all">
+              <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="20" height="10" rx="2" ry="2"></rect>
+                  <circle cx="6" cy="12" r="1"></circle>
+                  <circle cx="10" cy="12" r="1"></circle>
+                  <circle cx="14" cy="12" r="1"></circle>
+                  <circle cx="18" cy="12" r="1"></circle>
+                </svg>
+              </div>
+              <div class="text-left">
+                <div class="flex items-center gap-1 sm:gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                  <p class="text-[9px] sm:text-xs font-bold text-white tracking-wide">MikroTik ROS</p>
+                </div>
+                <p class="text-[7.5px] sm:text-[9px] text-cyan-400 font-mono">Routing &amp; Firewall</p>
+              </div>
+            </div>
+
+            <!-- User Cutout Photo with Deep Natural Drop Shadow -->
+            <img src="widad.png" alt="Ahmad Widad" class="hero-avatar w-full h-auto max-w-[190px] sm:max-w-[250px] lg:max-w-[320px] max-h-[210px] sm:max-h-[280px] lg:max-h-[360px] object-contain object-bottom select-none pointer-events-none filter drop-shadow-[0_20px_28px_rgba(0,0,0,0.85)] drop-shadow-[0_4px_14px_rgba(56,189,248,0.35)] relative z-10">
+
+            <!-- Refined Tech Grounding Badge (Clean & Balanced) -->
+            <div class="relative -mt-2.5 sm:-mt-3 z-20 bg-slate-900/95 border border-slate-700 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl shadow-xl flex items-center gap-2 sm:gap-2.5 backdrop-blur-md">
+              <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-md sm:rounded-lg bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 shrink-0">
+                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <div class="text-left">
+                <p class="text-[10px] sm:text-xs font-bold text-white tracking-wide">Network &amp; DevOps</p>
+                <p class="text-[8px] sm:text-[9px] text-sky-400 font-mono">Cybersecurity &amp; Infra</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+      </div>
+    </div>
+  </section>
+  <!-- Hero Section End -->
+
+  <!-- Gliding Cards Continuous Marquee Section Start -->
+  <section id="marquee" class="relative z-10 py-10 overflow-hidden border-y border-slate-800/80 bg-slate-900/40 backdrop-blur-md">
+    <div class="marquee-container w-full overflow-hidden select-none">
+      <div class="marquee-track flex gap-5">
+        
+        <!-- Marquee Item 1: Linux -->
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-amber-400">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 0C10.742 0 9.8 1.464 9.176 3.197c-.624 1.734-.848 3.864-.473 5.485-.36.27-.674.622-.916 1.05-.483.856-.632 1.97-.428 3.033-.404.184-.75.463-1.002.825-.505.723-.623 1.666-.363 2.54.26.873.869 1.583 1.68 1.926.326 1.782.99 3.337 1.926 4.39.936 1.053 2.115 1.554 3.4 1.554s2.464-.501 3.4-1.554c.936-1.053 1.6-2.608 1.926-4.39.811-.343 1.42-1.053 1.68-1.926.26-.874.142-1.817-.363-2.54-.252-.362-.598-.641-1.002-.825.204-1.063.055-2.177-.428-3.033-.242-.428-.556-.78-.916-1.05.375-1.621.151-3.751-.473-5.485C14.202 1.464 13.26 0 12.001 0z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">Linux OS</span>
+            <span class="text-[11px] text-slate-400">Ubuntu / Debian</span>
+          </div>
+        </div>
+
+        <!-- Marquee Item 2: MikroTik -->
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-sky-400">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h3.5v16H4V4zm6.25 0h3.5v16h-3.5V4zm6.25 0H20v16h-3.5V4zM4 10.5h16v3H4v-3z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">MikroTik</span>
+            <span class="text-[11px] text-slate-400">RouterOS / BGP</span>
+          </div>
+        </div>
+
+        <!-- Marquee Item 3: Docker -->
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-cyan-400">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.186.185.186zm0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.186.185.186zm-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.186.185.186zm-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.186.186.186zm5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185zm-2.929 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185zm-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H5.136a.186.186 0 00-.186.185v1.888c0 .102.084.185.186.185zm-2.928 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H2.208a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m21.808 1.872c-.13-.087-.688-.453-1.737-.413-.24-1.203-1.079-1.904-1.079-1.904s-.893 1.346-.499 2.454c-.705.35-1.597.41-1.954.417H.482a.48.48 0 00-.482.482c0 2.674.967 5.297 2.723 7.054a10.87 10.87 0 007.728 3.203c6.042 0 10.978-4.717 11.233-10.66.527-.474 1.89-1.127 2.107-1.282a.48.48 0 00-.097-.35z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">Docker</span>
+            <span class="text-[11px] text-slate-400">Compose / Containers</span>
+          </div>
+        </div>
+
+        <!-- Marquee Item 4: Proxmox -->
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-orange-500">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M8.286 0L0 8.286v7.428L8.286 24h7.428L24 15.714V8.286L15.714 0H8.286zm1.19 3.571h4.948l5.995 5.995v4.948l-5.995 5.995H9.476l-5.995-5.995V9.566l5.995-5.995zm.595 2.38v12.096h2.976v-4.166h2.38c2.658 0 4.167-1.509 4.167-3.87 0-2.36-1.509-3.87-4.167-3.87H10.07zm2.976 2.38h1.786c1.32 0 1.905.585 1.905 1.49 0 .905-.585 1.49-1.905 1.49h-1.786V8.331z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">Proxmox VE</span>
+            <span class="text-[11px] text-slate-400">HA Cluster / KVM</span>
+          </div>
+        </div>
+
+        <!-- Marquee Item 5: WireGuard -->
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-red-500">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L2.5 5.2v6.6c0 6.1 4 11.8 9.5 12.2 5.5-.4 9.5-6.1 9.5-12.2V5.2L12 0zm0 3.2l6.8 3.7v4.9c0 4.5-2.9 8.8-6.8 9.6-3.9-.8-6.8-5.1-6.8-9.6V6.9L12 3.2zm-1.2 4.6v4.4h-2l3.2 5 3.2-5h-2V7.8h-2.4z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">WireGuard</span>
+            <span class="text-[11px] text-slate-400">Encrypted VPN</span>
+          </div>
+        </div>
+
+        <!-- Marquee Item 6: Cybersecurity -->
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-emerald-400">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">Cybersecurity</span>
+            <span class="text-[11px] text-slate-400">Firewall / WAF</span>
+          </div>
+        </div>
+
+        <!-- Marquee Item 7: Python -->
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0">
+            <svg class="w-full h-full" viewBox="0 0 24 24"><path fill="#38bdf8" d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.006 2.75h5.813v.825H3.87S0 5.789 0 11.906c0 6.12 3.375 5.906 3.375 5.906h2.016v-2.828s-.11-3.375 3.3-3.375h5.672s3.172.05 3.172-3.094V3.094S18.008 0 11.914 0zM8.98 1.83a1.06 1.06 0 110 2.12 1.06 1.06 0 010-2.12z"/><path fill="#facc15" d="M12.086 24c6.094 0 5.714-2.656 5.714-2.656l-.006-2.75H11.98v-.825h8.14s3.87.442 3.87-5.675c0-6.117-3.375-5.906-3.375-5.906h-2.016v2.828s.11 3.375-3.3 3.375H9.627s-3.172-.05-3.172 3.094v5.422S5.992 24 12.086 24zm2.934-1.83a1.06 1.06 0 110-2.12 1.06 1.06 0 010 2.12z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">Python</span>
+            <span class="text-[11px] text-slate-400">Automation Scripting</span>
+          </div>
+        </div>
+
+        <!-- Marquee Item 8: Nginx -->
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-emerald-500">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 0l-10.5 6.062v11.875L12 24l10.5-6.062V6.062L12 0zm-2.625 6.25h2.125l4.375 6.875V6.25h1.75v11.5h-2.125L11.126 10.875v6.875h-1.75V6.25z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">Nginx</span>
+            <span class="text-[11px] text-slate-400">Reverse Proxy / SSL</span>
+          </div>
+        </div>
+
+        <!-- Marquee Item 9: Wireshark -->
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-sky-400">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M14.7 2C10.5 4.8 6.5 9 6.5 15.5c0 4.1 2.2 6.5 5.5 6.5 3.8 0 8-3.5 10-9.5-3.8.3-7.3-1.8-7.3-10.5zM2 19c2.5 0 4.8-.8 6.8-2.2C7.3 14.2 6.5 11 6.5 8c-3 3-4.5 7-4.5 11z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">Wireshark</span>
+            <span class="text-[11px] text-slate-400">Packet Analysis</span>
+          </div>
+        </div>
+
+        <!-- Marquee Item 10: Kubernetes -->
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-blue-500">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M11.667 0l-8.5 4.907v9.814l8.5 4.908 8.5-4.908V4.907L11.667 0zm0 2.253l6.533 3.773v7.546l-6.533 3.774-6.533-3.774V6.026l6.533-3.773zm-.8 3.5v2.8h1.6V5.753h-1.6zm-3.2 2.133l-1.387 1.387 1.98 1.98 1.133-1.133-1.726-2.234zm8 0l-1.727 2.234 1.134 1.133 1.98-1.98-1.387-1.387zM11.667 9.6a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">Kubernetes</span>
+            <span class="text-[11px] text-slate-400">DevOps Orchestration</span>
+          </div>
+        </div>
+
+        <!-- Duplicate Set for Seamless Infinite Loop -->
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-amber-400">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 0C10.742 0 9.8 1.464 9.176 3.197c-.624 1.734-.848 3.864-.473 5.485-.36.27-.674.622-.916 1.05-.483.856-.632 1.97-.428 3.033-.404.184-.75.463-1.002.825-.505.723-.623 1.666-.363 2.54.26.873.869 1.583 1.68 1.926.326 1.782.99 3.337 1.926 4.39.936 1.053 2.115 1.554 3.4 1.554s2.464-.501 3.4-1.554c.936-1.053 1.6-2.608 1.926-4.39.811-.343 1.42-1.053 1.68-1.926.26-.874.142-1.817-.363-2.54-.252-.362-.598-.641-1.002-.825.204-1.063.055-2.177-.428-3.033-.242-.428-.556-.78-.916-1.05.375-1.621.151-3.751-.473-5.485C14.202 1.464 13.26 0 12.001 0z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">Linux OS</span>
+            <span class="text-[11px] text-slate-400">Ubuntu / Debian</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-sky-400">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h3.5v16H4V4zm6.25 0h3.5v16h-3.5V4zm6.25 0H20v16h-3.5V4zM4 10.5h16v3H4v-3z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">MikroTik</span>
+            <span class="text-[11px] text-slate-400">RouterOS / BGP</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-cyan-400">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.186.185.186zm0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.186.185.186zm-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.186.185.186zm-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.186.186.186zm5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185zm-2.929 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185zm-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H5.136a.186.186 0 00-.186.185v1.888c0 .102.084.185.186.185zm-2.928 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H2.208a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m21.808 1.872c-.13-.087-.688-.453-1.737-.413-.24-1.203-1.079-1.904-1.079-1.904s-.893 1.346-.499 2.454c-.705.35-1.597.41-1.954.417H.482a.48.48 0 00-.482.482c0 2.674.967 5.297 2.723 7.054a10.87 10.87 0 007.728 3.203c6.042 0 10.978-4.717 11.233-10.66.527-.474 1.89-1.127 2.107-1.282a.48.48 0 00-.097-.35z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">Docker</span>
+            <span class="text-[11px] text-slate-400">Compose / Containers</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-orange-500">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M8.286 0L0 8.286v7.428L8.286 24h7.428L24 15.714V8.286L15.714 0H8.286zm1.19 3.571h4.948l5.995 5.995v4.948l-5.995 5.995H9.476l-5.995-5.995V9.566l5.995-5.995zm.595 2.38v12.096h2.976v-4.166h2.38c2.658 0 4.167-1.509 4.167-3.87 0-2.36-1.509-3.87-4.167-3.87H10.07zm2.976 2.38h1.786c1.32 0 1.905.585 1.905 1.49 0 .905-.585 1.49-1.905 1.49h-1.786V8.331z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">Proxmox VE</span>
+            <span class="text-[11px] text-slate-400">HA Cluster / KVM</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 bg-slate-900/80 border border-sky-500/20 px-5 py-3 rounded-xl shadow-lg hover:border-sky-400 hover:scale-105 transition-all">
+          <div class="w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/70 flex items-center justify-center p-1.5 shrink-0 text-red-500">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L2.5 5.2v6.6c0 6.1 4 11.8 9.5 12.2 5.5-.4 9.5-6.1 9.5-12.2V5.2L12 0zm0 3.2l6.8 3.7v4.9c0 4.5-2.9 8.8-6.8 9.6-3.9-.8-6.8-5.1-6.8-9.6V6.9L12 3.2zm-1.2 4.6v4.4h-2l3.2 5 3.2-5h-2V7.8h-2.4z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">WireGuard</span>
+            <span class="text-[11px] text-slate-400">Encrypted VPN</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Gliding Cards Continuous Marquee Section End -->
+
+  <!-- Tentang Saya Section Start -->
+  <section id="about" class="relative z-10 pt-20 pb-16 lg:pt-32 lg:pb-28">
+    <div class="container">
+      <div class="flex flex-wrap -mx-3 sm:-mx-4">
+        
+        <!-- Kolom Kiri: Profil & Fokus -->
+        <div class="w-full px-3 sm:px-4 mb-5 lg:mb-0 lg:w-1/2">
+          <div class="glide-card rounded-xl p-3.5 sm:p-6 lg:p-8 card-hover-glow h-full flex flex-col justify-between shadow-lg">
+            <div>
+              <h4 class="font-bold uppercase text-sky-400 text-[11px] sm:text-sm tracking-wider mb-1">Tentang Saya</h4>
+              <h2 class="font-extrabold text-white text-xl sm:text-2xl lg:text-3xl mb-3 max-w-md typewrite-on-scroll">
+                Network Engineering, DevOps &amp; Cybersecurity
+              </h2>
+              <p class="font-normal text-slate-300 leading-relaxed mb-2.5 text-xs sm:text-sm lg:text-base">
+                Saya adalah praktisi di bidang <strong>Network Engineering, DevOps, dan Cybersecurity</strong> dengan fokus mendalam pada administrasi server Linux, arsitektur jaringan enterprise, klaster virtualisasi High-Availability, serta hardening keamanan sistem komputasi.
+              </p>
+              <p class="font-normal text-slate-300 leading-relaxed mb-3 sm:mb-4 text-xs sm:text-sm lg:text-base">
+                Dalam operasional harian dan implementasi sistem produksi, saya aktif mengonfigurasi routing terdistribusi MikroTik, VPN terenkripsi WireGuard, virtualisasi Proxmox VE, deployment container Docker, serta otomatisasi backend menggunakan Python dan Laravel.
+              </p>
+            </div>
+
+            <!-- Social Links: strictly no phone number -->
+            <div class="pt-3 sm:pt-4 border-t border-slate-700/80 flex items-center gap-2.5 sm:gap-3">
+              <!-- GitHub -->
+              <a href="https://github.com/widad-sksn" target="_blank" title="GitHub widad-sksn" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex justify-center items-center bg-slate-900 border border-slate-700 text-sky-400 hover:bg-sky-500 hover:text-white hover:border-sky-500 transition duration-300 shadow">
+                <svg width="18" height="18" class="fill-current" role="img" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"></path>
+                </svg>
+              </a>
+
+              <!-- Email -->
+              <a href="mailto:widad.saksana@gmail.com" title="Email" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex justify-center items-center bg-slate-900 border border-slate-700 text-sky-400 hover:bg-sky-500 hover:text-white hover:border-sky-500 transition duration-300 shadow">
+                <svg width="18" height="18" class="fill-current" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"></path>
+                </svg>
+              </a>
+
+              <!-- LinkedIn -->
+              <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex justify-center items-center bg-slate-900 border border-slate-700 text-sky-400 hover:bg-sky-500 hover:text-white hover:border-sky-500 transition duration-300 shadow">
+                <svg width="16" height="16" class="fill-current" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kolom Ranan: Spesialisasi Cards -->
+        <div class="w-full px-3 sm:px-4 lg:w-1/2">
+          <div class="glide-card rounded-xl p-3.5 sm:p-6 lg:p-8 card-hover-glow h-full shadow-lg">
+            <h4 class="font-bold uppercase text-sky-400 text-[11px] sm:text-sm tracking-wider mb-1">Spesialisasi</h4>
+            <h2 class="font-extrabold text-white text-xl sm:text-2xl lg:text-3xl mb-3 max-w-md typewrite-on-scroll">
+              Bidang Kompetensi Inti
+            </h2>
+            
+            <div class="space-y-2.5 sm:space-y-3">
+              <!-- Item 1: Linux -->
+              <div class="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-[#0e1626] border border-slate-700 hover:border-sky-500/50 transition flex items-start gap-2.5 sm:gap-3.5 shadow-sm">
+                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-800 border border-slate-700 p-1.5 text-amber-400 shrink-0">
+                  <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 0C10.742 0 9.8 1.464 9.176 3.197c-.624 1.734-.848 3.864-.473 5.485-.36.27-.674.622-.916 1.05-.483.856-.632 1.97-.428 3.033-.404.184-.75.463-1.002.825-.505.723-.623 1.666-.363 2.54.26.873.869 1.583 1.68 1.926.326 1.782.99 3.337 1.926 4.39.936 1.053 2.115 1.554 3.4 1.554s2.464-.501 3.4-1.554c.936-1.053 1.6-2.608 1.926-4.39.811-.343 1.42-1.053 1.68-1.926.26-.874.142-1.817-.363-2.54-.252-.362-.598-.641-1.002-.825.204-1.063.055-2.177-.428-3.033-.242-.428-.556-.78-.916-1.05.375-1.621.151-3.751-.473-5.485C14.202 1.464 13.26 0 12.001 0z"/></svg>
+                </div>
+                <div>
+                  <h5 class="text-white text-xs sm:text-sm font-semibold mb-0.5">
+                    Sistem Operasi &amp; Server Linux
+                  </h5>
+                  <p class="text-[10px] sm:text-xs text-slate-300">Ubuntu, Debian, kernel tuning, automation scripting bash, serta manajemen pengguna &amp; hak akses.</p>
+                </div>
+              </div>
+
+              <!-- Item 2: DevOps & Containers -->
+              <div class="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-[#0e1626] border border-slate-700 hover:border-sky-500/50 transition flex items-start gap-2.5 sm:gap-3.5 shadow-sm">
+                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-800 border border-slate-700 p-1.5 text-cyan-400 shrink-0">
+                  <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.186.185.186zm0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.186.185.186zm-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.186.185.186zm-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.186.186.186zm5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185zm-2.929 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185zm-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H5.136a.186.186 0 00-.186.185v1.888c0 .102.084.185.186.185zm-2.928 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H2.208a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m21.808 1.872c-.13-.087-.688-.453-1.737-.413-.24-1.203-1.079-1.904-1.079-1.904s-.893 1.346-.499 2.454c-.705.35-1.597.41-1.954.417H.482a.48.48 0 00-.482.482c0 2.674.967 5.297 2.723 7.054a10.87 10.87 0 007.728 3.203c6.042 0 10.978-4.717 11.233-10.66.527-.474 1.89-1.127 2.107-1.282a.48.48 0 00-.097-.35z"/></svg>
+                </div>
+                <div>
+                  <h5 class="text-white text-xs sm:text-sm font-semibold mb-0.5">
+                    DevOps &amp; Virtualisasi
+                  </h5>
+                  <p class="text-[10px] sm:text-xs text-slate-300">Proxmox VE (KVM/LXC), Docker Compose, orkestrasi container, serta pencadangan otomatis.</p>
+                </div>
+              </div>
+
+              <!-- Item 3: Network Engineering -->
+              <div class="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-[#0e1626] border border-slate-700 hover:border-sky-500/50 transition flex items-start gap-2.5 sm:gap-3.5 shadow-sm">
+                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-800 border border-slate-700 p-1.5 text-sky-400 shrink-0">
+                  <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h3.5v16H4V4zm6.25 0h3.5v16h-3.5V4zm6.25 0H20v16h-3.5V4zM4 10.5h16v3H4v-3z"/></svg>
+                </div>
+                <div>
+                  <h5 class="text-white text-xs sm:text-sm font-semibold mb-0.5">
+                    Network Engineering &amp; Routing
+                  </h5>
+                  <p class="text-[10px] sm:text-xs text-slate-300">MikroTik RouterOS, WireGuard VPN tunnel terenkripsi, firewall filter, VLAN tagging, dan traffic routing.</p>
+                </div>
+              </div>
+
+              <!-- Item 4: Cybersecurity & Hardening -->
+              <div class="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-[#0e1626] border border-slate-700 hover:border-sky-500/50 transition flex items-start gap-2.5 sm:gap-3.5 shadow-sm">
+                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-800 border border-slate-700 p-1.5 text-emerald-400 shrink-0">
+                  <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                </div>
+                <div>
+                  <h5 class="text-white text-xs sm:text-sm font-semibold mb-0.5">
+                    Cybersecurity &amp; Reverse Proxy
+                  </h5>
+                  <p class="text-[10px] sm:text-xs text-slate-300">Nginx reverse proxy, automated Let's Encrypt SSL, rate limiting, header hardening, serta audit keamanan Linux.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- Tentang Saya Section End -->
+
+  <!-- Portfolio Section Start -->
+  <section id="portfolio" class="relative z-10 pt-20 pb-20 lg:pt-32 lg:pb-24 border-t border-slate-800/80 bg-slate-900/60">
+    <div class="container">
+      
+      <!-- Section Title -->
+      <div class="w-full px-4 mb-10 lg:mb-14 text-center">
+        <h4 class="font-bold text-xs sm:text-sm uppercase tracking-widest text-sky-400 mb-1.5">Portfolio</h4>
+        <h2 class="font-extrabold text-white text-2xl sm:text-3xl lg:text-5xl tracking-tight">Koleksi Proyek Unggulan</h2>
+        <p class="font-normal text-slate-300 text-xs sm:text-base lg:text-lg max-w-xl mx-auto mt-2">
+          Implementasi infrastruktur jaringan, modul server Linux, dan platform digital terintegrasi.
+        </p>
+      </div>
+
+      <!-- Neatly Arranged Project Cards Grid (Compact & Tidy on Mobile) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 px-1.5 sm:px-4">
+
+        <!-- Card 1: IMM Korkom UNISA (korkomunisa) - Screenshot Direct from Web -->
+        <div class="glide-card rounded-xl overflow-hidden card-hover-glow flex flex-col justify-between shadow-lg">
+          <div>
+            <!-- Live Web Preview Header -->
+            <div class="relative h-28 sm:h-36 lg:h-44 w-full overflow-hidden rounded-t-xl border-b border-slate-700 group/img bg-slate-950">
+              <img src="immkorkom-preview.png" alt="IMM Korkom UNISA Portal Website" loading="lazy" class="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-500 ease-out">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#151f32] via-transparent to-transparent"></div>
+              <div class="absolute top-2 left-2 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md border border-sky-500/30 px-2 py-0.5 rounded text-[10px] font-semibold text-sky-400">
+                <span>Web &amp; DB Portal</span>
+              </div>
+              <div class="absolute bottom-2 right-2 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md border border-slate-700 px-2 py-0.5 rounded-full text-[9px] text-slate-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Live Web</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-3 sm:p-4 lg:p-5">
+              <h3 class="font-bold text-sm sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">IMM Korkom UNISA</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-2 sm:mb-2.5">
+                Platform resmi pertukaran informasi &amp; komunikasi Ikatan Mahasiswa Muhammadiyah Korkom UNISA, automasi alur data, berita, dan administrasi organisasi.
+              </p>
+              <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3">
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">Laravel</span>
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">REST API</span>
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">MySQL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Actions (Live Demo + Repo) -->
+          <div class="px-3 pb-3 sm:px-4 sm:pb-4 flex flex-wrap gap-1.5 sm:gap-2">
+            <a href="https://immkorkom.unisayogya.ac.id" target="_blank" class="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-white bg-sky-600 hover:bg-sky-500 py-1 px-2.5 sm:py-1.5 sm:px-3 rounded-lg shadow transition">
+              <span>Kunjungi Web</span>
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+            </a>
+            <a href="https://github.com/widad-sksn/korkomunisa" target="_blank" class="inline-flex items-center gap-1 text-[11px] sm:text-xs font-medium text-slate-300 hover:text-white bg-slate-750 hover:bg-slate-700 border border-slate-700 py-1 px-2.5 sm:py-1.5 sm:px-3 rounded-lg transition">
+              <span>GitHub</span>
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: Sistem Lab PSTI — Laboratorium PSTI UNISA (absen-lab) - Screenshot Direct from Web -->
+        <div class="glide-card rounded-xl overflow-hidden card-hover-glow flex flex-col justify-between shadow-lg">
+          <div>
+            <!-- Live Web Preview Header -->
+            <div class="relative h-28 sm:h-36 lg:h-44 w-full overflow-hidden rounded-t-xl border-b border-slate-700 group/img bg-slate-950">
+              <img src="labrisetti-preview.png" alt="Sistem Presensi Laboratorium PSTI UNISA" loading="lazy" class="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-500 ease-out">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#151f32] via-transparent to-transparent"></div>
+              <div class="absolute top-2 left-2 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md border border-emerald-500/30 px-2 py-0.5 rounded text-[10px] font-semibold text-emerald-400">
+                <span>Network &amp; Subnet Lab</span>
+              </div>
+              <div class="absolute bottom-2 right-2 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md border border-slate-700 px-2 py-0.5 rounded-full text-[9px] text-slate-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Live Web</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-3 sm:p-4 lg:p-5">
+              <h3 class="font-bold text-sm sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">Sistem Lab PSTI UNISA</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-2 sm:mb-2.5">
+                Sistem presensi laboratorium jaringan PSTI UNISA berbasis web dengan validasi subnet IP lokal dan pemeriksaan gateway untuk absensi mahasiswa yang terverifikasi dan akurat.
+              </p>
+              <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3">
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">PHP / Web</span>
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">Subnet Check</span>
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">Network Gateway</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Actions (Live Demo + Repo) -->
+          <div class="px-3 pb-3 sm:px-4 sm:pb-4 flex flex-wrap gap-1.5 sm:gap-2">
+            <a href="https://labrisetti.unisayogya.ac.id/" target="_blank" class="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-white bg-sky-600 hover:bg-sky-500 py-1 px-2.5 sm:py-1.5 sm:px-3 rounded-lg shadow transition">
+              <span>Kunjungi Sistem Lab</span>
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+            </a>
+            <a href="https://github.com/widad-sksn/absen-lab" target="_blank" class="inline-flex items-center gap-1 text-[11px] sm:text-xs font-medium text-slate-300 hover:text-white bg-slate-750 hover:bg-slate-700 border border-slate-700 py-1 px-2.5 sm:py-1.5 sm:px-3 rounded-lg transition">
+              <span>GitHub</span>
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: Linux Server & Virtualization (Tugas-SLV) -->
+        <div class="glide-card rounded-xl overflow-hidden card-hover-glow flex flex-col justify-between shadow-lg">
+          <div>
+            <!-- Tech Illustration Header -->
+            <div class="relative h-28 sm:h-36 lg:h-44 w-full overflow-hidden rounded-t-xl border-b border-slate-700 group/img">
+              <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=800&q=80" alt="Tugas-SLV Linux Server" loading="lazy" class="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500 ease-out">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#151f32] via-slate-900/40 to-transparent"></div>
+              <div class="absolute top-2 left-2 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md border border-cyan-500/30 px-2 py-0.5 rounded text-[10px] font-semibold text-cyan-400">
+                <span>Linux &amp; Docker CLI</span>
+              </div>
+              <div class="absolute bottom-2 right-2 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md border border-slate-700 px-2 py-0.5 rounded-full text-[9px] text-slate-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span>Automation Ready</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-3 sm:p-4 lg:p-5">
+              <h3 class="font-bold text-sm sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">Tugas-SLV (Server Linux)</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-2 sm:mb-2.5">
+                Koleksi skrip otomatisasi konfigurasi server Linux, orkestrasi container Docker, dan dokumentasi provisioning virtual machine untuk lingkungan server.
+              </p>
+              <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3">
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">Bash Scripting</span>
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">Docker Compose</span>
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">Proxmox</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+            <a href="https://github.com/widad-sksn/Tugas-SLV" target="_blank" class="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-sky-400 hover:text-sky-300 transition">
+              <span>Buka Repository GitHub</span>
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 4: WireGuard VPN Gateway -->
+        <div class="glide-card rounded-xl overflow-hidden card-hover-glow flex flex-col justify-between shadow-lg">
+          <div>
+            <!-- Tech Illustration Header -->
+            <div class="relative h-28 sm:h-36 lg:h-44 w-full overflow-hidden rounded-t-xl border-b border-slate-700 group/img">
+              <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=800&q=80" alt="WireGuard VPN Gateway" loading="lazy" class="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500 ease-out">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#151f32] via-slate-900/40 to-transparent"></div>
+              <div class="absolute top-2 left-2 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md border border-sky-500/30 px-2 py-0.5 rounded text-[10px] font-semibold text-sky-400">
+                <span>VPN &amp; Cryptography</span>
+              </div>
+              <div class="absolute bottom-2 right-2 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md border border-slate-700 px-2 py-0.5 rounded-full text-[9px] text-slate-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+                <span>ChaCha20 Hardened</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-3 sm:p-4 lg:p-5">
+              <h3 class="font-bold text-sm sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">WireGuard VPN Gateway</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-2 sm:mb-2.5">
+                Implementasi terowongan VPN WireGuard performa tinggi dengan enkripsi modern ChaCha20-Poly1305 untuk interkoneksi aman antar jaringan kampus dan remote site.
+              </p>
+              <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3">
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">WireGuard</span>
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">MikroTik</span>
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">Linux Routing</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+            <a href="https://github.com/widad-sksn" target="_blank" class="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-sky-400 hover:text-sky-300 transition">
+              <span>Buka Profil GitHub</span>
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 5: Proxmox HA Cluster -->
+        <div class="glide-card rounded-xl overflow-hidden card-hover-glow flex flex-col justify-between shadow-lg">
+          <div>
+            <!-- Tech Illustration Header -->
+            <div class="relative h-28 sm:h-36 lg:h-44 w-full overflow-hidden rounded-t-xl border-b border-slate-700 group/img">
+              <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Proxmox HA Cluster" loading="lazy" class="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500 ease-out">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#151f32] via-slate-900/40 to-transparent"></div>
+              <div class="absolute top-2 left-2 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md border border-amber-500/30 px-2 py-0.5 rounded text-[10px] font-semibold text-amber-400">
+                <span>PVE Virtualization &amp; HA</span>
+              </div>
+              <div class="absolute bottom-2 right-2 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md border border-slate-700 px-2 py-0.5 rounded-full text-[9px] text-slate-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Cluster Active</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-3 sm:p-4 lg:p-5">
+              <h3 class="font-bold text-sm sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">Proxmox HA Cluster</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-2 sm:mb-2.5">
+                Penyusunan klaster virtualisasi multi-node dengan zero-downtime live migration, sinkronisasi storage ZFS/NFS, dan pemantauan resource server terintegrasi.
+              </p>
+              <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3">
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">Proxmox VE</span>
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">KVM / LXC</span>
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">ZFS Storage</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+            <a href="https://github.com/widad-sksn" target="_blank" class="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-sky-400 hover:text-sky-300 transition">
+              <span>Buka Profil GitHub</span>
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 6: Automated Reverse Proxy & SSL Gateway -->
+        <div class="glide-card rounded-xl overflow-hidden card-hover-glow flex flex-col justify-between shadow-lg">
+          <div>
+            <!-- Tech Illustration Header -->
+            <div class="relative h-28 sm:h-36 lg:h-44 w-full overflow-hidden rounded-t-xl border-b border-slate-700 group/img">
+              <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80" alt="Reverse Proxy Layer" loading="lazy" class="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500 ease-out">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#151f32] via-slate-900/40 to-transparent"></div>
+              <div class="absolute top-2 left-2 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md border border-emerald-500/30 px-2 py-0.5 rounded text-[10px] font-semibold text-emerald-400">
+                <span>Traffic &amp; Load Balancing</span>
+              </div>
+              <div class="absolute bottom-2 right-2 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md border border-slate-700 px-2 py-0.5 rounded-full text-[9px] text-slate-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Nginx Upstream</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-3 sm:p-4 lg:p-5">
+              <h3 class="font-bold text-sm sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">Reverse Proxy Layer</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-2 sm:mb-2.5">
+                Gerbang proxy terpusat dengan automated Let's Encrypt certificate renewal, HTTP/2 multiplexing, rate-limiting, dan proteksi header keamanan OWASP.
+              </p>
+              <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3">
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">Nginx</span>
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">Caddy</span>
+                <span class="text-[9px] sm:text-xs bg-slate-900 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">Certbot SSL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="px-3 pb-3 sm:px-4 sm:pb-4">
+            <a href="https://github.com/widad-sksn" target="_blank" class="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-sky-400 hover:text-sky-300 transition">
+              <span>Buka Profil GitHub</span>
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- Portfolio Section End -->
+
+  <!-- Pengalaman Section Start -->
+  <section id="pengalaman" class="relative z-10 pt-20 pb-20 lg:pt-32 lg:pb-28">
+    <div class="container">
+      <div class="w-full px-4 mb-10 lg:mb-14 text-center">
+        <h4 class="font-bold text-xs sm:text-sm uppercase tracking-widest text-sky-400 mb-1.5">Pengalaman</h4>
+        <h2 class="font-extrabold text-white text-2xl sm:text-3xl lg:text-5xl">Rekam Jejak &amp; Kontribusi</h2>
+        <p class="font-normal text-slate-300 text-xs sm:text-base lg:text-lg max-w-xl mx-auto mt-2">
+          Peran aktif dalam akademik kampus dan implementasi infrastruktur teknologi informasi.
+        </p>
+      </div>
+
+      <div class="w-full px-1.5 sm:px-4 max-w-4xl mx-auto space-y-3 sm:space-y-4 lg:space-y-5">
+
+        <!-- Exp 1: Network & Infrastructure Engineer -->
+        <div class="glide-card rounded-xl p-3 sm:p-5 lg:p-6 card-hover-glow shadow-lg relative overflow-hidden">
+          <div class="flex flex-wrap items-center justify-between mb-2 sm:mb-2.5">
+            <div>
+              <span class="text-[10px] sm:text-xs uppercase font-bold text-sky-400 tracking-wider">Universitas 'Aisyiyah Yogyakarta (UNISA)</span>
+              <h3 class="text-sm sm:text-lg lg:text-xl font-bold text-white mt-0.5 typewrite-on-scroll">Network &amp; Systems Infrastructure Engineer</h3>
+              <p class="text-sky-300 font-medium text-[11px] sm:text-xs">Laboratorium Komputer &amp; Jaringan</p>
+            </div>
+            <span class="text-[9px] sm:text-[10px] font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/30 py-0.5 px-2 rounded-md mt-1.5 sm:mt-0">
+              Infrastruktur Jaringan
+            </span>
+          </div>
+          <p class="text-slate-300 text-xs sm:text-sm lg:text-base leading-relaxed">
+            Bertanggung jawab dalam pengelolaan dan pemeliharaan infrastruktur jaringan laboratorium, administrasi server Linux (routing, firewall, subnetting, VLAN), konfigurasi virtualisasi klaster Proxmox VE, serta merancang tools utilitas jaringan seperti <a href="https://labrisetti.unisayogya.ac.id/" target="_blank" class="text-[11px] sm:text-xs bg-slate-900 text-sky-400 hover:text-sky-300 px-1.5 py-0.5 rounded border border-sky-500/40 underline font-mono">Sistem Lab PSTI (absen-lab)</a> untuk pencatatan presensi terverifikasi gateway lokal.
+          </p>
+        </div>
+
+        <!-- Exp 2: PT LifeMedia -->
+        <div class="glide-card rounded-xl p-3 sm:p-5 lg:p-6 card-hover-glow shadow-lg">
+          <div class="flex flex-wrap items-center justify-between mb-2 sm:mb-2.5">
+            <div>
+              <span class="text-[10px] sm:text-xs uppercase font-bold text-slate-400 tracking-wider">Internet Service Provider (ISP)</span>
+              <h3 class="text-sm sm:text-lg lg:text-xl font-bold text-white mt-0.5 typewrite-on-scroll">PT LifeMedia</h3>
+              <p class="text-sky-400 font-medium text-[11px] sm:text-xs">Engineering Onsite UNISA</p>
+            </div>
+            <span class="text-[9px] sm:text-[10px] font-semibold bg-slate-900 text-slate-300 border border-slate-700 py-0.5 px-2 rounded-md mt-1.5 sm:mt-0">
+              Pengalaman Industri
+            </span>
+          </div>
+          <p class="text-slate-300 text-xs sm:text-sm lg:text-base leading-relaxed">
+            Bertanggung jawab sebagai Onsite Engineer untuk infrastruktur jaringan ISP PT LifeMedia di lingkungan kampus UNISA: menangani pemeliharaan perangkat distribusi, monitoring throughput &amp; uptime koneksi, instalasi serta troubleshooting perangkat jaringan (MikroTik, switch, access point), dan memastikan reliabilitas layanan internet bagi civitas akademika.
+          </p>
+        </div>
+
+        <!-- Exp 3: Independent DevOps Consultant -->
+        <div class="glide-card rounded-xl p-3 sm:p-5 lg:p-6 card-hover-glow shadow-lg">
+          <div class="flex flex-wrap items-center justify-between mb-2 sm:mb-2.5">
+            <div>
+              <span class="text-[10px] sm:text-xs uppercase font-bold text-slate-400 tracking-wider">Freelance &amp; Consulting</span>
+              <h3 class="text-sm sm:text-lg lg:text-xl font-bold text-white mt-0.5 typewrite-on-scroll">Independent IT &amp; DevOps Consultant</h3>
+              <p class="text-sky-400 font-medium text-[11px] sm:text-xs">Network &amp; Security Implementation</p>
+            </div>
+            <span class="text-[9px] sm:text-[10px] font-semibold bg-slate-900 text-slate-300 border border-slate-700 py-0.5 px-2 rounded-md mt-1.5 sm:mt-0">
+              Proyek Klien
+            </span>
+          </div>
+          <p class="text-slate-300 text-xs sm:text-sm lg:text-base leading-relaxed">
+            Menyediakan jasa perancangan tunnel VPN WireGuard site-to-site terenkripsi, instalasi klaster Proxmox VE, konfigurasi Nginx reverse proxy, dan audit keamanan firewall Linux.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- Pengalaman Section End -->
+
+  <!-- Kontak Section Start -->
+  <section id="contact" class="relative z-10 pt-20 pb-20 lg:pt-32 lg:pb-24 bg-slate-900/80 border-t border-slate-800/80">
+    <div class="container">
+      <div class="w-full px-4 mb-6 sm:mb-10 text-center">
+        <h4 class="font-bold text-xs sm:text-sm uppercase tracking-widest text-sky-400 mb-1">Kontak</h4>
+        <h2 class="font-extrabold text-white text-xl sm:text-3xl lg:text-5xl">Hubungi Saya</h2>
+        <p class="font-normal text-slate-300 text-xs sm:text-base lg:text-lg max-w-xl mx-auto mt-1.5">
+          Tertarik mendiskusikan arsitektur jaringan, sistem laboratorium, atau peluang kolaborasi? Kirimkan pesan di bawah ini.
+        </p>
+      </div>
+
+      <!-- Social Links (No phone numbers) -->
+      <div class="flex items-center justify-center gap-2.5 sm:gap-4 mb-6 sm:mb-10">
+        <a href="https://github.com/widad-sksn" target="_blank" title="GitHub" class="w-9 h-9 sm:w-11 sm:h-11 rounded-full flex justify-center items-center bg-slate-800 border border-slate-700 text-sky-400 hover:bg-sky-500 hover:text-white hover:border-sky-500 transition duration-300 shadow">
+          <svg width="18" height="18" class="fill-current" viewBox="0 0 30 30"><path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"></path></svg>
+        </a>
+        <a href="mailto:widad.saksana@gmail.com" title="Email" class="w-9 h-9 sm:w-11 sm:h-11 rounded-full flex justify-center items-center bg-slate-800 border border-slate-700 text-sky-400 hover:bg-sky-500 hover:text-white hover:border-sky-500 transition duration-300 shadow">
+          <svg width="17" height="17" class="fill-current" viewBox="0 0 24 24"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"></path></svg>
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn" class="w-9 h-9 sm:w-11 sm:h-11 rounded-full flex justify-center items-center bg-slate-800 border border-slate-700 text-sky-400 hover:bg-sky-500 hover:text-white hover:border-sky-500 transition duration-300 shadow">
+          <svg width="15" height="15" class="fill-current" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+        </a>
+      </div>
+
+      <!-- Modern Dark Form (Solid, Compact on Mobile) -->
+      <form id="contact-form" onsubmit="event.preventDefault(); alert('Terima kasih! Pesan Anda telah diterima.'); this.reset();" class="max-w-2xl mx-auto bg-slate-800 border border-slate-700/80 rounded-xl p-3.5 sm:p-7 lg:p-9 card-hover-glow shadow-xl">
+        <div class="mb-3 sm:mb-5">
+          <label for="name" class="block text-xs sm:text-sm font-semibold text-slate-300 mb-1">Nama Lengkap</label>
+          <input type="text" id="name" required placeholder="Masukkan nama Anda" class="w-full bg-slate-900 border border-slate-700 text-white p-2.5 sm:p-3.5 rounded-lg sm:rounded-xl text-xs sm:text-sm focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 transition">
+        </div>
+        <div class="mb-3 sm:mb-5">
+          <label for="email" class="block text-xs sm:text-sm font-semibold text-slate-300 mb-1">Alamat Email</label>
+          <input type="email" id="email" required placeholder="nama@domain.com" class="w-full bg-slate-900 border border-slate-700 text-white p-2.5 sm:p-3.5 rounded-lg sm:rounded-xl text-xs sm:text-sm focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 transition">
+        </div>
+        <div class="mb-4 sm:mb-6">
+          <label for="message" class="block text-xs sm:text-sm font-semibold text-slate-300 mb-1">Pesan Anda</label>
+          <textarea id="message" required placeholder="Tuliskan pesan atau topik diskusi di sini..." class="w-full bg-slate-900 border border-slate-700 text-white p-2.5 sm:p-3.5 rounded-lg sm:rounded-xl text-xs sm:text-sm focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 h-24 sm:h-32 transition"></textarea>
+        </div>
+        <button type="submit" class="w-full text-xs sm:text-sm lg:text-base font-semibold text-white bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 py-2.5 sm:py-3 px-6 rounded-lg sm:rounded-xl shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition duration-300">
+          Kirim Pesan
+        </button>
+      </form>
+    </div>
+  </section>
+  <!-- Kontak Section End -->
+
+  <!-- Footer Start -->
+  <footer class="relative z-10 bg-darker pt-16 pb-12 border-t border-slate-800/80">
+    <div class="container">
+      <div class="flex flex-wrap -mx-4 mb-10">
+        
+        <!-- Kolom 1 -->
+        <div class="w-full px-4 mb-8 md:w-1/3">
+          <h2 class="font-extrabold text-2xl text-white mb-2">Ahmad Widad</h2>
+          <p class="text-sky-400 font-medium text-sm mb-3">Network Engineering • DevOps • Cybersecurity</p>
+          <p class="text-slate-400 text-sm leading-relaxed mb-4">
+            Yogyakarta, Indonesia | Fokus pada perancangan infrastruktur jaringan, virtualisasi server, pipeline DevOps, dan keamanan sistem informasi.
+          </p>
+          <a href="https://github.com/widad-sksn" target="_blank" class="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-sky-400 transition">
+            <svg width="18" height="18" class="fill-current" viewBox="0 0 30 30"><path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"></path></svg>
+            <span>github.com/widad-sksn</span>
+          </a>
+        </div>
+
+        <!-- Kolom 2 -->
+        <div class="w-full px-4 mb-8 md:w-1/3">
+          <h3 class="font-bold text-lg text-white mb-4">Navigasi Halaman</h3>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li><a href="#home" class="hover:text-sky-400 transition">Beranda</a></li>
+            <li><a href="#about" class="hover:text-sky-400 transition">Tentang Saya</a></li>
+            <li><a href="#marquee" class="hover:text-sky-400 transition">Skills Ticker</a></li>
+            <li><a href="#portfolio" class="hover:text-sky-400 transition">Portfolio Proyek</a></li>
+            <li><a href="#pengalaman" class="hover:text-sky-400 transition">Pengalaman</a></li>
+            <li><a href="#contact" class="hover:text-sky-400 transition">Kontak</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom 3 -->
+        <div class="w-full px-4 mb-8 md:w-1/3">
+          <h3 class="font-bold text-lg text-white mb-4">Fokus Keahlian</h3>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li>Administrasi Linux (Ubuntu, Debian)</li>
+            <li>Virtualisasi Proxmox VE &amp; Docker</li>
+            <li>Routing MikroTik &amp; WireGuard VPN</li>
+            <li>Backend RESTful API (Laravel &amp; Python)</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-8 border-t border-slate-800 text-center">
+        <p class="text-xs text-slate-500">
+          &copy; 2026 Ahmad Widad | Portfolio Modern Dark Theme with Blue Accent
+        </p>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer End -->
+
+  <!-- Floating Back to Top Button -->
+  <a href="#home" id="to-top" class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-tr from-sky-500 to-blue-600 rounded-full hidden justify-center items-center shadow-lg shadow-sky-500/30 hover:scale-110 transition duration-300 fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50" aria-label="Kembali ke atas">
+    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white fill-current" viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+  </a>
+
+  <!-- Interactive Scripts -->
+  <script>
+    // 0. Cyber Terminal & Blast Doors Preloader
+    const preloader = document.querySelector('#preloader');
+    const doorTop = document.querySelector('#door-top');
+    const doorBottom = document.querySelector('#door-bottom');
+    const terminalConsole = document.querySelector('#terminal-console');
+    const termBadge = document.querySelector('#term-status-badge');
+
+    if (preloader) {
+      document.body.style.overflow = 'hidden';
+
+      const lineDelays = [
+        { id: '#term-line-2', delay: 240 },
+        { id: '#term-line-3', delay: 520 },
+        { id: '#term-line-4', delay: 800 },
+        { id: '#term-line-5', delay: 1100 }
+      ];
+
+      lineDelays.forEach(item => {
+        setTimeout(() => {
+          const el = document.querySelector(item.id);
+          if (el) el.classList.remove('opacity-0');
+        }, item.delay);
+      });
+
+      // Terminal complete & open blast doors
+      setTimeout(() => {
+        if (termBadge) termBadge.textContent = 'VAULT UNLOCKED';
+        if (terminalConsole) {
+          terminalConsole.classList.add('opacity-0', 'scale-90');
+        }
+
+        setTimeout(() => {
+          if (doorTop) doorTop.classList.add('-translate-y-full');
+          if (doorBottom) doorBottom.classList.add('translate-y-full');
+          document.body.style.overflow = '';
+
+          setTimeout(() => {
+            preloader.remove();
+          }, 750);
+        }, 250);
+      }, 1450);
+    }
+
+    // 1. Navbar Scroll Behavior & Back-to-Top Button
+    const navbarPill = document.querySelector('#navbar-pill');
+    const toTop = document.querySelector('#to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        navbarPill.classList.add('nav-scrolled');
+      } else {
+        navbarPill.classList.remove('nav-scrolled');
+      }
+
+      if (window.scrollY > 300) {
+        toTop.classList.remove('hidden');
+        toTop.classList.add('flex');
+      } else {
+        toTop.classList.remove('flex');
+        toTop.classList.add('hidden');
+      }
+    });
+
+    // 2. Mobile Hamburger Menu Toggle
+    const hamburger = document.querySelector('#hamburger');
+    const navMenu = document.querySelector('#nav-menu');
+
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hamburger.classList.toggle('hamburger-active');
+      navMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('#nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('hamburger-active');
+        navMenu.classList.add('hidden');
+      });
+    });
+
+    window.addEventListener('click', (e) => {
+      if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        hamburger.classList.remove('hamburger-active');
+        navMenu.classList.add('hidden');
+      }
+    });
+
+    // 3. Staggered Gliding Cards Scroll Reveal (IntersectionObserver)
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.1,
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry, idx) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('revealed');
+          }, idx * 120);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.glide-card').forEach(card => {
+      revealObserver.observe(card);
+    });
+
+    // 4. Typewriter Animation on Scroll Reveal - Smooth & Natural Cadence
+    const typeObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          observer.unobserve(el);
+          const fullText = el.getAttribute('data-type-text') || el.textContent.trim();
+          el.textContent = '';
+          el.classList.add('typing-cursor');
+
+          let i = 0;
+          // Smooth, relaxed typing pace (45-65ms per character)
+          const typingSpeed = Math.max(45, Math.min(65, Math.floor(1200 / (fullText.length || 1))));
+          function typeNextChar() {
+            if (i < fullText.length) {
+              el.textContent += fullText.charAt(i);
+              i++;
+              setTimeout(typeNextChar, typingSpeed);
+            } else {
+              setTimeout(() => {
+                el.classList.remove('typing-cursor');
+              }, 900);
+            }
+          }
+          // Calm delay so card settles smoothly before typing begins
+          setTimeout(typeNextChar, 350);
+        }
+      });
+    }, { root: null, rootMargin: '0px 0px -30px 0px', threshold: 0.15 });
+
+    document.querySelectorAll('.typewrite-on-scroll').forEach(el => {
+      el.setAttribute('data-type-text', el.textContent.trim());
+      typeObserver.observe(el);
+    });
+  </script>
+</body>
+</html>
