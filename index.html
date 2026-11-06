@@ -246,12 +246,22 @@
       box-shadow: 0 16px 32px -5px rgba(2, 132, 199, 0.3);
     }
 
-    /* Typewriter Cursor */
-    .typing-cursor {
-      border-right: 2.5px solid #38bdf8;
-      animation: cursorBlink 0.75s step-end infinite;
+    /* High-Tech Glowing Typewriter Cursor */
+    .type-cursor {
       display: inline-block;
-      padding-right: 2px;
+      width: 2.5px;
+      height: 1.05em;
+      background-color: #38bdf8;
+      margin-left: 3px;
+      vertical-align: -0.12em;
+      border-radius: 1px;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.75);
+      animation: smoothCursorBlink 0.8s ease-in-out infinite;
+      transition: opacity 0.3s ease;
+    }
+    @keyframes smoothCursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.15; }
     }
 
     /* High-Tech Animated Project Visuals */
@@ -1475,35 +1485,66 @@
       revealObserver.observe(card);
     });
 
-    // 4. Typewriter Animation on Scroll Reveal - Smooth & Natural Cadence
+    // 4. Smooth, Fluid Typewriter Animation on Scroll Reveal (Zero CLS & Follow Cursor)
     const typeObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const el = entry.target;
           observer.unobserve(el);
+
           const fullText = el.getAttribute('data-type-text') || el.textContent.trim();
-          el.textContent = '';
-          el.classList.add('typing-cursor');
+          if (!fullText) return;
+
+          // Lock initial height so cards and surrounding elements don't jump or collapse
+          const naturalHeight = el.offsetHeight;
+          if (naturalHeight > 0) {
+            el.style.minHeight = `${naturalHeight}px`;
+          }
+
+          // Structure: text container + inline glowing cursor
+          el.innerHTML = '<span class="typed-content"></span><span class="type-cursor"></span>';
+          const textSpan = el.querySelector('.typed-content');
+          const cursorSpan = el.querySelector('.type-cursor');
 
           let i = 0;
-          // Smooth, relaxed typing pace (45-65ms per character)
-          const typingSpeed = Math.max(45, Math.min(65, Math.floor(1200 / (fullText.length || 1))));
           function typeNextChar() {
             if (i < fullText.length) {
-              el.textContent += fullText.charAt(i);
+              const char = fullText.charAt(i);
+              textSpan.textContent += char;
               i++;
-              setTimeout(typeNextChar, typingSpeed);
+
+              // Organic humanized typing speed
+              let charDelay = 28 + Math.floor(Math.random() * 14); // 28 - 42ms
+              if (char === ' ') {
+                charDelay = 18; // smooth word spacing
+              } else if (char === ',' || char === '&' || char === '-') {
+                charDelay = 95; // subtle breath on punctuation
+              } else if (char === '.' || char === ':') {
+                charDelay = 120; // sentence pause
+              }
+
+              setTimeout(typeNextChar, charDelay);
             } else {
+              // Graceful completion: linger then fade out cursor cleanly
               setTimeout(() => {
-                el.classList.remove('typing-cursor');
-              }, 900);
+                if (cursorSpan) {
+                  cursorSpan.style.opacity = '0';
+                  setTimeout(() => {
+                    cursorSpan.remove();
+                    el.style.minHeight = '';
+                  }, 300);
+                } else {
+                  el.style.minHeight = '';
+                }
+              }, 700);
             }
           }
-          // Calm delay so card settles smoothly before typing begins
-          setTimeout(typeNextChar, 350);
+
+          // Gentle settle delay after card scroll reveal
+          setTimeout(typeNextChar, 180);
         }
       });
-    }, { root: null, rootMargin: '0px 0px -30px 0px', threshold: 0.15 });
+    }, { root: null, rootMargin: '0px 0px -40px 0px', threshold: 0.15 });
 
     document.querySelectorAll('.typewrite-on-scroll').forEach(el => {
       el.setAttribute('data-type-text', el.textContent.trim());
