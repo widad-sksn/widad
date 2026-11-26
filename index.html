@@ -55,7 +55,7 @@
       overflow-x: hidden;
     }
 
-    /* Custom Batik Vector Pattern Background */
+    /* Custom Batik Vector Pattern Background (Lower Sections) */
     .tech-grid-bg {
       background-color: #0f172a;
       position: relative;
@@ -70,6 +70,25 @@
       background-image: url('batik-bg.svg');
       background-size: 1120px 681px;
       background-repeat: repeat;
+    }
+
+    /* Hero Section Distinct Batik Vector Background (Top Section) */
+    .hero-batik-bg {
+      background-color: #0f172a;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-batik-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.15;
+      background-image: url('batik-hero.svg');
+      background-size: 1280px 448px;
+      background-repeat: repeat;
+      background-position: center top;
     }
 
     /* Custom Scrollbar */
@@ -461,8 +480,8 @@
   <!-- Modern Floating Pill Navbar End -->
 
   <!-- Hero Section Start -->
-  <section id="home" class="relative z-10 pt-28 pb-16 lg:pt-36 lg:pb-28">
-    <div class="container max-w-5xl mx-auto px-4 sm:px-6">
+  <section id="home" class="relative z-10 hero-batik-bg pt-28 pb-16 lg:pt-36 lg:pb-28">
+    <div class="container relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
       <div class="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-10">
         
         <!-- Hero Text: Shifted Comfortably Inward Toward Center -->
