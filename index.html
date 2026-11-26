@@ -139,20 +139,18 @@
       z-index: 1;
     }
 
-    /* Role Badge: Rich Blue Batik + iOS Liquid Glass Effect */
+    /* Role Badge: Deep Sapphire Blue Batik + Subtle iOS Dark Glass */
     .role-badge-glass {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, #0369a1 0%, #0284c7 48%, #1d4ed8 100%);
-      border: 1px solid rgba(186, 230, 253, 0.55);
+      background: linear-gradient(135deg, #0c2340 0%, #0f3057 52%, #132c54 100%);
+      border: 1px solid rgba(56, 189, 248, 0.32);
       box-shadow:
-        inset 0 1.5px 0 rgba(255, 255, 255, 0.55),
-        inset 0 -1px 0 rgba(125, 211, 252, 0.3),
-        0 8px 24px -4px rgba(2, 132, 199, 0.5),
-        0 2px 6px rgba(0, 0, 0, 0.35);
-      -webkit-backdrop-filter: blur(12px) saturate(160%);
-      backdrop-filter: blur(12px) saturate(160%);
-      text-shadow: 0 1px 2px rgba(2, 6, 23, 0.35);
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        inset 0 -1px 0 rgba(56, 189, 248, 0.15),
+        0 4px 14px rgba(2, 6, 23, 0.55);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      backdrop-filter: blur(12px) saturate(140%);
     }
     .role-badge-glass::before {
       content: '';
@@ -160,11 +158,10 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.28;
+      opacity: 0.2;
       background-image: url('batik-hero.svg');
       background-size: 240px 84px;
       background-repeat: repeat;
-      filter: brightness(2.4) contrast(1.1);
     }
     .role-badge-glass::after {
       content: '';
@@ -174,10 +171,9 @@
       pointer-events: none;
       background: linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.34) 0%,
-        rgba(255, 255, 255, 0.1) 46%,
-        rgba(255, 255, 255, 0) 52%,
-        rgba(186, 230, 253, 0.12) 100%
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.03) 45%,
+        rgba(255, 255, 255, 0) 55%
       );
     }
 
@@ -296,25 +292,25 @@
       box-shadow: 0 15px 35px -5px rgba(2, 132, 199, 0.25), 0 10px 20px -5px rgba(0, 0, 0, 0.5) !important;
     }
 
-    /* Hamburger Lines */
+    /* Hamburger Lines (Compact Mobile) */
     .hamburger-line {
-      margin-top: 0.4rem;
-      margin-bottom: 0.4rem;
+      margin-top: 4px;
+      margin-bottom: 4px;
       display: block;
       height: 2px;
-      width: 26px;
+      width: 20px;
       background-color: #38bdf8;
       transition: all 0.3s ease-in-out;
     }
     .hamburger-active > span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
+      transform: translateX(3px) rotate(45deg);
     }
     .hamburger-active > span:nth-child(2) {
       opacity: 0;
       transform: scale(0);
     }
     .hamburger-active > span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
+      transform: translateX(3px) rotate(-45deg);
     }
 
     /* Infinite Gliding Cards Marquee */
@@ -517,11 +513,11 @@
   <!-- Futuristic Cyber Vault Terminal Preloader End -->
 
   <!-- Modern Floating Pill Navbar Start -->
-  <header class="fixed top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-4 transition-all duration-300 pointer-events-none">
-    <nav id="navbar-pill" class="pointer-events-auto bg-slate-900 border border-slate-700/80 shadow-[0_10px_25px_rgba(0,0,0,0.5)] rounded-full px-4 sm:px-5 py-2 flex items-center justify-between lg:justify-center gap-3 sm:gap-6 transition-all duration-300 w-full max-w-[94%] sm:max-w-md lg:max-w-none lg:w-auto">
+  <header class="fixed top-3 lg:top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-4 transition-all duration-300 pointer-events-none">
+    <nav id="navbar-pill" class="pointer-events-auto bg-slate-900/95 backdrop-blur-md border border-slate-700/80 shadow-[0_10px_25px_rgba(0,0,0,0.5)] rounded-full px-3.5 sm:px-5 py-1.5 lg:py-2 flex items-center justify-between lg:justify-center gap-3 sm:gap-6 transition-all duration-300 w-full max-w-[88%] sm:max-w-sm lg:max-w-none lg:w-auto">
       
       <!-- Mobile Only Brand Logo: widad (no dot) -->
-      <a href="#home" class="block lg:hidden font-extrabold text-base text-white tracking-wider group">
+      <a href="#home" class="block lg:hidden font-extrabold text-sm sm:text-base text-white tracking-wider group">
         <span class="group-hover:text-sky-400 transition duration-300">widad</span>
       </a>
 
@@ -556,7 +552,7 @@
     </nav>
 
     <!-- Mobile Dropdown Menu -->
-    <div id="nav-menu" class="hidden pointer-events-auto absolute top-16 left-4 right-4 max-w-sm mx-auto bg-slate-900/95 backdrop-blur-2xl border border-sky-500/30 rounded-xl shadow-2xl p-5 z-50 lg:hidden">
+    <div id="nav-menu" class="hidden pointer-events-auto absolute top-14 left-4 right-4 max-w-[88%] sm:max-w-sm mx-auto bg-slate-900/95 backdrop-blur-2xl border border-sky-500/30 rounded-xl shadow-2xl p-4 z-50 lg:hidden">
       <ul class="space-y-2">
         <li><a href="#home" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Beranda</a></li>
         <li><a href="#about" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Tentang</a></li>
@@ -577,7 +573,7 @@
         <!-- Hero Text: Shifted Comfortably Inward Toward Center -->
         <div class="w-full lg:w-1/2 order-2 lg:order-1 text-center lg:text-left flex flex-col items-center lg:items-start lg:pl-6 xl:pl-10">
           <!-- Role Badge -->
-          <div class="role-badge-glass inline-flex items-center gap-2 py-1.5 px-3.5 sm:py-2 sm:px-4 rounded-xl text-white text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+          <div class="role-badge-glass inline-flex items-center gap-2 py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-lg text-sky-200 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             <span class="relative z-10">Network Engineering | DevOps | Cybersecurity</span>
           </div>
 
@@ -602,7 +598,7 @@
               <span>Hubungi Saya</span>
               <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
-            <a href="#portfolio" class="text-xs sm:text-sm lg:text-base font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-sky-500/40 py-2.5 px-5 sm:py-3 sm:px-6 rounded-xl transition duration-300 ease-in-out inline-block">
+            <a href="#portfolio" class="text-xs sm:text-sm lg:text-base font-medium text-slate-100 hover:text-white bg-slate-800/45 hover:bg-slate-800/65 backdrop-blur-md border border-white/15 hover:border-sky-400/45 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_4px_16px_rgba(2,6,23,0.45)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_8px_22px_rgba(2,132,199,0.2)] hover:-translate-y-0.5 py-2.5 px-5 sm:py-3 sm:px-6 rounded-xl transition duration-300 ease-in-out inline-block">
               Lihat Proyek
             </a>
           </div>
@@ -1434,52 +1430,28 @@
   <!-- Kontak Section End -->
 
   <!-- Footer Start -->
-  <footer class="relative z-10 bg-darker pt-16 pb-12 border-t border-slate-800/80">
-    <div class="container">
-      <div class="flex flex-wrap -mx-4 mb-10">
-        
-        <!-- Kolom 1 -->
-        <div class="w-full px-4 mb-8 md:w-1/3">
-          <h2 class="font-extrabold text-2xl text-white mb-2">Ahmad Widad</h2>
-          <p class="text-sky-400 font-medium text-sm mb-3">Network Engineering • DevOps • Cybersecurity</p>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4">
-            Yogyakarta, Indonesia | Fokus pada perancangan infrastruktur jaringan, virtualisasi server, pipeline DevOps, dan keamanan sistem informasi.
-          </p>
-          <a href="https://github.com/widad-sksn" target="_blank" class="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-sky-400 transition">
-            <svg width="18" height="18" class="fill-current" viewBox="0 0 30 30"><path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"></path></svg>
+  <footer class="relative z-10 bg-darker pt-8 pb-7 border-t border-slate-800/80">
+    <div class="container max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-800/80 text-center sm:text-left">
+        <div>
+          <h2 class="font-bold text-base sm:text-lg text-white">Ahmad Widad</h2>
+          <p class="text-sky-400 text-xs font-medium mt-0.5">Network Engineering • DevOps • Cybersecurity</p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-5 text-xs sm:text-sm text-slate-400">
+          <a href="#home" class="hover:text-sky-400 transition">Beranda</a>
+          <a href="#portfolio" class="hover:text-sky-400 transition">Portfolio</a>
+          <a href="#contact" class="hover:text-sky-400 transition">Kontak</a>
+          <a href="https://github.com/widad-sksn" target="_blank" class="inline-flex items-center gap-1.5 text-slate-300 hover:text-sky-400 transition">
+            <svg width="15" height="15" class="fill-current" viewBox="0 0 30 30"><path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"></path></svg>
             <span>github.com/widad-sksn</span>
           </a>
         </div>
-
-        <!-- Kolom 2 -->
-        <div class="w-full px-4 mb-8 md:w-1/3">
-          <h3 class="font-bold text-lg text-white mb-4">Navigasi Halaman</h3>
-          <ul class="space-y-2 text-sm text-slate-400">
-            <li><a href="#home" class="hover:text-sky-400 transition">Beranda</a></li>
-            <li><a href="#about" class="hover:text-sky-400 transition">Tentang Saya</a></li>
-            <li><a href="#marquee" class="hover:text-sky-400 transition">Skills Ticker</a></li>
-            <li><a href="#portfolio" class="hover:text-sky-400 transition">Portfolio Proyek</a></li>
-            <li><a href="#pengalaman" class="hover:text-sky-400 transition">Pengalaman</a></li>
-            <li><a href="#contact" class="hover:text-sky-400 transition">Kontak</a></li>
-          </ul>
-        </div>
-
-        <!-- Kolom 3 -->
-        <div class="w-full px-4 mb-8 md:w-1/3">
-          <h3 class="font-bold text-lg text-white mb-4">Fokus Keahlian</h3>
-          <ul class="space-y-2 text-sm text-slate-400">
-            <li>Administrasi Linux (Ubuntu, Debian)</li>
-            <li>Virtualisasi Proxmox VE &amp; Docker</li>
-            <li>Routing MikroTik &amp; WireGuard VPN</li>
-            <li>Backend RESTful API (Laravel &amp; Python)</li>
-          </ul>
-        </div>
-
       </div>
 
-      <div class="pt-8 border-t border-slate-800 text-center">
+      <div class="pt-5 text-center">
         <p class="text-xs text-slate-500">
-          &copy; 2026 Ahmad Widad | Portfolio Modern Dark Theme with Blue Accent
+          &copy; 2026 widad-sksn
         </p>
       </div>
     </div>
