@@ -139,6 +139,48 @@
       z-index: 1;
     }
 
+    /* Role Badge: Rich Blue Batik + iOS Liquid Glass Effect */
+    .role-badge-glass {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0369a1 0%, #0284c7 48%, #1d4ed8 100%);
+      border: 1px solid rgba(186, 230, 253, 0.55);
+      box-shadow:
+        inset 0 1.5px 0 rgba(255, 255, 255, 0.55),
+        inset 0 -1px 0 rgba(125, 211, 252, 0.3),
+        0 8px 24px -4px rgba(2, 132, 199, 0.5),
+        0 2px 6px rgba(0, 0, 0, 0.35);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+      backdrop-filter: blur(12px) saturate(160%);
+      text-shadow: 0 1px 2px rgba(2, 6, 23, 0.35);
+    }
+    .role-badge-glass::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.28;
+      background-image: url('batik-hero.svg');
+      background-size: 240px 84px;
+      background-repeat: repeat;
+      filter: brightness(2.4) contrast(1.1);
+    }
+    .role-badge-glass::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.34) 0%,
+        rgba(255, 255, 255, 0.1) 46%,
+        rgba(255, 255, 255, 0) 52%,
+        rgba(186, 230, 253, 0.12) 100%
+      );
+    }
+
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 9px;
@@ -535,8 +577,8 @@
         <!-- Hero Text: Shifted Comfortably Inward Toward Center -->
         <div class="w-full lg:w-1/2 order-2 lg:order-1 text-center lg:text-left flex flex-col items-center lg:items-start lg:pl-6 xl:pl-10">
           <!-- Role Badge -->
-          <div class="inline-flex items-center gap-2 py-1 px-3 sm:py-1.5 sm:px-3.5 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs sm:text-sm font-semibold mb-3 sm:mb-4 shadow-sm">
-            Network Engineering | DevOps | Cybersecurity
+          <div class="role-badge-glass inline-flex items-center gap-2 py-1.5 px-3.5 sm:py-2 sm:px-4 rounded-xl text-white text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+            <span class="relative z-10">Network Engineering | DevOps | Cybersecurity</span>
           </div>
 
           <h1 class="text-sm font-semibold text-sky-400 md:text-xl">
