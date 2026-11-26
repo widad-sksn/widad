@@ -353,6 +353,34 @@
     .nav-link.nav-link-active::after {
       width: 20px;
     }
+
+    /* Compact Language Switcher (ID / EN) */
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .lang-btn {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      color: #94a3b8;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .lang-btn:hover {
+      color: #e2e8f0;
+    }
+    .lang-btn.active {
+      color: #ffffff;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+    }
     .nav-scrolled {
       background: rgba(15, 23, 42, 0.86) !important;
       border-color: rgba(56, 189, 248, 0.32) !important;
@@ -593,8 +621,8 @@
 
       <!-- Desktop Nav Items: Compact Symmetric Frosted Pill -->
       <div class="hidden lg:flex items-center gap-1">
-        <a href="#home" class="nav-link nav-link-active text-[13px] font-medium text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full transition duration-200">Beranda</a>
-        <a href="#about" class="nav-link text-[13px] font-medium text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full transition duration-200">Tentang</a>
+        <a href="#home" data-i18n="nav.home" class="nav-link nav-link-active text-[13px] font-medium text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full transition duration-200">Beranda</a>
+        <a href="#about" data-i18n="nav.about" class="nav-link text-[13px] font-medium text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full transition duration-200">Tentang</a>
         <a href="#marquee" class="nav-link text-[13px] font-medium text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full transition duration-200">Skills</a>
 
         <!-- Center Brand: widad -->
@@ -603,27 +631,41 @@
         </a>
 
         <a href="#portfolio" class="nav-link text-[13px] font-medium text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full transition duration-200">Portfolio</a>
-        <a href="#pengalaman" class="nav-link text-[13px] font-medium text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full transition duration-200">Pengalaman</a>
-        <a href="#contact" class="nav-link text-[13px] font-medium text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full transition duration-200">Kontak</a>
+        <a href="#pengalaman" data-i18n="nav.experience" class="nav-link text-[13px] font-medium text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full transition duration-200">Pengalaman</a>
+        <a href="#contact" data-i18n="nav.contact" class="nav-link text-[13px] font-medium text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full transition duration-200">Kontak</a>
+
+        <span class="w-px h-4 bg-white/15 mx-1.5"></span>
+
+        <!-- Desktop Language Switcher -->
+        <div class="lang-switch" role="group" aria-label="Language switch">
+          <button type="button" data-lang="id" class="lang-btn active">ID</button>
+          <button type="button" data-lang="en" class="lang-btn">EN</button>
+        </div>
       </div>
 
-      <!-- Hamburger Button (Mobile) -->
-      <button id="hamburger" type="button" class="block lg:hidden focus:outline-none p-1 text-slate-300" aria-label="Toggle Menu">
-        <span class="hamburger-line origin-top-left"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line origin-bottom-left"></span>
-      </button>
+      <!-- Mobile Right Controls: Lang Switcher + Hamburger -->
+      <div class="flex lg:hidden items-center gap-2">
+        <div class="lang-switch" role="group" aria-label="Language switch">
+          <button type="button" data-lang="id" class="lang-btn active">ID</button>
+          <button type="button" data-lang="en" class="lang-btn">EN</button>
+        </div>
+        <button id="hamburger" type="button" class="block focus:outline-none p-1 text-slate-300" aria-label="Toggle Menu">
+          <span class="hamburger-line origin-top-left"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line origin-bottom-left"></span>
+        </button>
+      </div>
     </nav>
 
     <!-- Mobile Dropdown Menu -->
     <div id="nav-menu" class="hidden pointer-events-auto absolute top-14 left-4 right-4 max-w-[88%] sm:max-w-sm mx-auto bg-slate-900/95 backdrop-blur-2xl border border-sky-500/30 rounded-xl shadow-2xl p-4 z-50 lg:hidden">
       <ul class="space-y-2">
-        <li><a href="#home" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Beranda</a></li>
-        <li><a href="#about" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Tentang</a></li>
+        <li><a href="#home" data-i18n="nav.home" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Beranda</a></li>
+        <li><a href="#about" data-i18n="nav.about" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Tentang</a></li>
         <li><a href="#marquee" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Skills Ticker</a></li>
         <li><a href="#portfolio" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Portfolio</a></li>
-        <li><a href="#pengalaman" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Pengalaman</a></li>
-        <li><a href="#contact" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Kontak</a></li>
+        <li><a href="#pengalaman" data-i18n="nav.experience" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Pengalaman</a></li>
+        <li><a href="#contact" data-i18n="nav.contact" class="block text-slate-200 hover:text-sky-400 hover:bg-slate-800/60 font-medium py-2.5 px-4 rounded-xl transition">Kontak</a></li>
       </ul>
     </div>
   </header>
@@ -642,27 +684,27 @@
           </div>
 
           <h1 class="text-sm font-semibold text-sky-400 md:text-xl">
-            Halo Semua 👋, Saya 
+            <span data-i18n="hero.greeting">Halo Semua 👋, Saya</span>
             <span class="block font-black text-white text-3xl sm:text-4xl lg:text-5xl mt-1 tracking-tight drop-shadow-sm">
               Ahmad Widad
             </span>
           </h1>
 
           <h2 class="font-medium text-slate-300 text-sm sm:text-lg lg:text-xl mb-3 sm:mb-4 mt-2 leading-snug">
-            Fokus pada <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-400 font-bold">Network Engineering, DevOps &amp; Cybersecurity</span>
+            <span data-i18n="hero.focusPrefix">Fokus pada</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-400 font-bold">Network Engineering, DevOps &amp; Cybersecurity</span>
             <span class="block text-slate-400 text-xs sm:text-sm lg:text-base font-normal mt-1">Linux Server Architecture, Cloud Infrastructure &amp; Security Hardening</span>
           </h2>
 
-          <p class="font-normal text-slate-300 mb-6 lg:mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0 text-xs sm:text-sm lg:text-base">
+          <p data-i18n="hero.desc" class="font-normal text-slate-300 mb-6 lg:mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0 text-xs sm:text-sm lg:text-base">
             Merancang infrastruktur jaringan berkinerja tinggi, klaster virtualisasi Proxmox, otomatisasi container Docker, konfigurasi routing &amp; firewall MikroTik, serta implementasi pertahanan keamanan sistem modern.
           </p>
 
           <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
             <a href="#contact" class="text-xs sm:text-sm lg:text-base font-semibold text-white bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 py-2.5 px-5 sm:py-3 sm:px-7 rounded-xl shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:-translate-y-0.5 transition duration-300 ease-in-out inline-flex items-center gap-2">
-              <span>Hubungi Saya</span>
+              <span data-i18n="hero.ctaContact">Hubungi Saya</span>
               <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
-            <a href="#portfolio" class="text-xs sm:text-sm lg:text-base font-medium text-slate-100 hover:text-white bg-slate-800/45 hover:bg-slate-800/65 backdrop-blur-md border border-white/15 hover:border-sky-400/45 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_4px_16px_rgba(2,6,23,0.45)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_8px_22px_rgba(2,132,199,0.2)] hover:-translate-y-0.5 py-2.5 px-5 sm:py-3 sm:px-6 rounded-xl transition duration-300 ease-in-out inline-block">
+            <a href="#portfolio" data-i18n="hero.ctaProjects" class="text-xs sm:text-sm lg:text-base font-medium text-slate-100 hover:text-white bg-slate-800/45 hover:bg-slate-800/65 backdrop-blur-md border border-white/15 hover:border-sky-400/45 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_4px_16px_rgba(2,6,23,0.45)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_8px_22px_rgba(2,132,199,0.2)] hover:-translate-y-0.5 py-2.5 px-5 sm:py-3 sm:px-6 rounded-xl transition duration-300 ease-in-out inline-block">
               Lihat Proyek
             </a>
           </div>
@@ -980,14 +1022,14 @@
         <div class="w-full px-3 sm:px-4 mb-5 lg:mb-0 lg:w-1/2">
           <div class="glide-card rounded-xl p-3.5 sm:p-6 lg:p-8 card-hover-glow h-full flex flex-col justify-between shadow-lg">
             <div>
-              <h4 class="font-bold uppercase text-sky-400 text-[11px] sm:text-sm tracking-wider mb-1">Tentang Saya</h4>
+              <h4 data-i18n="about.eyebrow" class="font-bold uppercase text-sky-400 text-[11px] sm:text-sm tracking-wider mb-1">Tentang Saya</h4>
               <h2 class="font-extrabold text-white text-xl sm:text-2xl lg:text-3xl mb-3 max-w-md typewrite-on-scroll">
                 Network Engineering, DevOps &amp; Cybersecurity
               </h2>
-              <p class="font-normal text-slate-300 leading-relaxed mb-2.5 text-xs sm:text-sm lg:text-base">
+              <p data-i18n-html="about.p1" class="font-normal text-slate-300 leading-relaxed mb-2.5 text-xs sm:text-sm lg:text-base">
                 Saya adalah praktisi di bidang <strong>Network Engineering, DevOps, dan Cybersecurity</strong> dengan fokus mendalam pada administrasi server Linux, arsitektur jaringan enterprise, klaster virtualisasi High-Availability, serta hardening keamanan sistem komputasi.
               </p>
-              <p class="font-normal text-slate-300 leading-relaxed mb-3 sm:mb-4 text-xs sm:text-sm lg:text-base">
+              <p data-i18n="about.p2" class="font-normal text-slate-300 leading-relaxed mb-3 sm:mb-4 text-xs sm:text-sm lg:text-base">
                 Dalam operasional harian dan implementasi sistem produksi, saya aktif mengonfigurasi routing terdistribusi MikroTik, VPN terenkripsi WireGuard, virtualisasi Proxmox VE, deployment container Docker, serta otomatisasi backend menggunakan Python dan Laravel.
               </p>
             </div>
@@ -1021,8 +1063,8 @@
         <!-- Kolom Ranan: Spesialisasi Cards -->
         <div class="w-full px-3 sm:px-4 lg:w-1/2">
           <div class="glide-card rounded-xl p-3.5 sm:p-6 lg:p-8 card-hover-glow h-full shadow-lg">
-            <h4 class="font-bold uppercase text-sky-400 text-[11px] sm:text-sm tracking-wider mb-1">Spesialisasi</h4>
-            <h2 class="font-extrabold text-white text-xl sm:text-2xl lg:text-3xl mb-3 max-w-md typewrite-on-scroll">
+            <h4 data-i18n="about.spec.eyebrow" class="font-bold uppercase text-sky-400 text-[11px] sm:text-sm tracking-wider mb-1">Spesialisasi</h4>
+            <h2 data-i18n="about.spec.title" class="font-extrabold text-white text-xl sm:text-2xl lg:text-3xl mb-3 max-w-md typewrite-on-scroll">
               Bidang Kompetensi Inti
             </h2>
             
@@ -1033,10 +1075,10 @@
                   <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 0C10.742 0 9.8 1.464 9.176 3.197c-.624 1.734-.848 3.864-.473 5.485-.36.27-.674.622-.916 1.05-.483.856-.632 1.97-.428 3.033-.404.184-.75.463-1.002.825-.505.723-.623 1.666-.363 2.54.26.873.869 1.583 1.68 1.926.326 1.782.99 3.337 1.926 4.39.936 1.053 2.115 1.554 3.4 1.554s2.464-.501 3.4-1.554c.936-1.053 1.6-2.608 1.926-4.39.811-.343 1.42-1.053 1.68-1.926.26-.874.142-1.817-.363-2.54-.252-.362-.598-.641-1.002-.825.204-1.063.055-2.177-.428-3.033-.242-.428-.556-.78-.916-1.05.375-1.621.151-3.751-.473-5.485C14.202 1.464 13.26 0 12.001 0z"/></svg>
                 </div>
                 <div>
-                  <h5 class="text-white text-xs sm:text-sm font-semibold mb-0.5">
+                  <h5 data-i18n="about.spec1.title" class="text-white text-xs sm:text-sm font-semibold mb-0.5">
                     Sistem Operasi &amp; Server Linux
                   </h5>
-                  <p class="text-[10px] sm:text-xs text-slate-300">Ubuntu, Debian, kernel tuning, automation scripting bash, serta manajemen pengguna &amp; hak akses.</p>
+                  <p data-i18n="about.spec1.desc" class="text-[10px] sm:text-xs text-slate-300">Ubuntu, Debian, kernel tuning, automation scripting bash, serta manajemen pengguna &amp; hak akses.</p>
                 </div>
               </div>
 
@@ -1046,10 +1088,10 @@
                   <svg class="w-full h-full" viewBox="0 0 24 24" fill="currentColor"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.186.185.186zm0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.186.185.186zm-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.186.185.186zm-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.186.186.186zm5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185zm-2.929 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185zm-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H5.136a.186.186 0 00-.186.185v1.888c0 .102.084.185.186.185zm-2.928 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H2.208a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m21.808 1.872c-.13-.087-.688-.453-1.737-.413-.24-1.203-1.079-1.904-1.079-1.904s-.893 1.346-.499 2.454c-.705.35-1.597.41-1.954.417H.482a.48.48 0 00-.482.482c0 2.674.967 5.297 2.723 7.054a10.87 10.87 0 007.728 3.203c6.042 0 10.978-4.717 11.233-10.66.527-.474 1.89-1.127 2.107-1.282a.48.48 0 00-.097-.35z"/></svg>
                 </div>
                 <div>
-                  <h5 class="text-white text-xs sm:text-sm font-semibold mb-0.5">
+                  <h5 data-i18n="about.spec2.title" class="text-white text-xs sm:text-sm font-semibold mb-0.5">
                     DevOps &amp; Virtualisasi
                   </h5>
-                  <p class="text-[10px] sm:text-xs text-slate-300">Proxmox VE (KVM/LXC), Docker Compose, orkestrasi container, serta pencadangan otomatis.</p>
+                  <p data-i18n="about.spec2.desc" class="text-[10px] sm:text-xs text-slate-300">Proxmox VE (KVM/LXC), Docker Compose, orkestrasi container, serta pencadangan otomatis.</p>
                 </div>
               </div>
 
@@ -1062,7 +1104,7 @@
                   <h5 class="text-white text-xs sm:text-sm font-semibold mb-0.5">
                     Network Engineering &amp; Routing
                   </h5>
-                  <p class="text-[10px] sm:text-xs text-slate-300">MikroTik RouterOS, WireGuard VPN tunnel terenkripsi, firewall filter, VLAN tagging, dan traffic routing.</p>
+                  <p data-i18n="about.spec3.desc" class="text-[10px] sm:text-xs text-slate-300">MikroTik RouterOS, WireGuard VPN tunnel terenkripsi, firewall filter, VLAN tagging, dan traffic routing.</p>
                 </div>
               </div>
 
@@ -1075,7 +1117,7 @@
                   <h5 class="text-white text-xs sm:text-sm font-semibold mb-0.5">
                     Cybersecurity &amp; Reverse Proxy
                   </h5>
-                  <p class="text-[10px] sm:text-xs text-slate-300">Nginx reverse proxy, automated Let's Encrypt SSL, rate limiting, header hardening, serta audit keamanan Linux.</p>
+                  <p data-i18n="about.spec4.desc" class="text-[10px] sm:text-xs text-slate-300">Nginx reverse proxy, automated Let's Encrypt SSL, rate limiting, header hardening, serta audit keamanan Linux.</p>
                 </div>
               </div>
             </div>
@@ -1095,8 +1137,8 @@
       <!-- Section Title -->
       <div class="w-full px-4 mb-6 sm:mb-8 lg:mb-10 text-center">
         <h4 class="font-bold text-xs sm:text-sm uppercase tracking-widest text-sky-400 mb-1.5">Portfolio</h4>
-        <h2 class="font-extrabold text-white text-2xl sm:text-3xl lg:text-5xl tracking-tight">Koleksi Proyek Unggulan</h2>
-        <p class="font-normal text-slate-300 text-xs sm:text-base lg:text-lg max-w-xl mx-auto mt-2">
+        <h2 data-i18n="portfolio.title" class="font-extrabold text-white text-2xl sm:text-3xl lg:text-5xl tracking-tight">Koleksi Proyek Unggulan</h2>
+        <p data-i18n="portfolio.subtitle" class="font-normal text-slate-300 text-xs sm:text-base lg:text-lg max-w-xl mx-auto mt-2">
           Implementasi infrastruktur jaringan, modul server Linux, dan platform digital terintegrasi.
         </p>
       </div>
@@ -1123,7 +1165,7 @@
             <!-- Card Body -->
             <div class="p-2.5 sm:p-4 lg:p-5">
               <h3 class="font-bold text-xs sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">IMM Korkom UNISA</h3>
-              <p class="text-[10px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mb-1.5 sm:mb-2.5">
+              <p data-i18n="p1.desc" class="text-[10px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mb-1.5 sm:mb-2.5">
                 Platform resmi pertukaran informasi &amp; komunikasi Ikatan Mahasiswa Muhammadiyah Korkom UNISA, automasi alur data, berita, dan administrasi organisasi.
               </p>
               <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-1 sm:mb-3">
@@ -1137,7 +1179,7 @@
           <!-- Card Actions (Live Demo + Repo) -->
           <div class="px-2.5 pb-2.5 sm:px-4 sm:pb-4 flex flex-wrap gap-1 sm:gap-2">
             <a href="https://immkorkom.unisayogya.ac.id" target="_blank" class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-semibold text-white bg-sky-600 hover:bg-sky-500 py-1 px-2 sm:py-1.5 sm:px-3 rounded-lg shadow transition">
-              <span>Kunjungi Web</span>
+              <span data-i18n="btn.visitWeb">Kunjungi Web</span>
               <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" viewBox="0 0 20 20"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
             </a>
             <a href="https://github.com/widad-sksn/korkomunisa" target="_blank" class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-medium text-slate-300 hover:text-white bg-slate-750 hover:bg-slate-700 border border-slate-700 py-1 px-2 sm:py-1.5 sm:px-3 rounded-lg transition">
@@ -1165,8 +1207,8 @@
 
             <!-- Card Body -->
             <div class="p-2.5 sm:p-4 lg:p-5">
-              <h3 class="font-bold text-xs sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">Sistem Lab PSTI UNISA</h3>
-              <p class="text-[10px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mb-1.5 sm:mb-2.5">
+              <h3 data-i18n="p2.title" class="font-bold text-xs sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">Sistem Lab PSTI UNISA</h3>
+              <p data-i18n="p2.desc" class="text-[10px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mb-1.5 sm:mb-2.5">
                 Sistem presensi laboratorium jaringan PSTI UNISA berbasis web dengan validasi subnet IP lokal dan pemeriksaan gateway untuk absensi mahasiswa yang terverifikasi dan akurat.
               </p>
               <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-1 sm:mb-3">
@@ -1180,7 +1222,7 @@
           <!-- Card Actions (Live Demo + Repo) -->
           <div class="px-2.5 pb-2.5 sm:px-4 sm:pb-4 flex flex-wrap gap-1 sm:gap-2">
             <a href="https://labrisetti.unisayogya.ac.id/" target="_blank" class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-semibold text-white bg-sky-600 hover:bg-sky-500 py-1 px-2 sm:py-1.5 sm:px-3 rounded-lg shadow transition">
-              <span>Kunjungi Lab</span>
+              <span data-i18n="btn.visitLab">Kunjungi Lab</span>
               <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" viewBox="0 0 20 20"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
             </a>
             <a href="https://github.com/widad-sksn/absen-lab" target="_blank" class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-medium text-slate-300 hover:text-white bg-slate-750 hover:bg-slate-700 border border-slate-700 py-1 px-2 sm:py-1.5 sm:px-3 rounded-lg transition">
@@ -1208,8 +1250,8 @@
 
             <!-- Card Body -->
             <div class="p-2.5 sm:p-4 lg:p-5">
-              <h3 class="font-bold text-xs sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">Tugas-SLV (Server Linux)</h3>
-              <p class="text-[10px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mb-1.5 sm:mb-2.5">
+              <h3 data-i18n="p3.title" class="font-bold text-xs sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">Tugas-SLV (Server Linux)</h3>
+              <p data-i18n="p3.desc" class="text-[10px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mb-1.5 sm:mb-2.5">
                 Koleksi skrip otomatisasi konfigurasi server Linux, orkestrasi container Docker, dan dokumentasi provisioning virtual machine untuk lingkungan server.
               </p>
               <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-1 sm:mb-3">
@@ -1223,7 +1265,7 @@
           <!-- Card Actions -->
           <div class="px-2.5 pb-2.5 sm:px-4 sm:pb-4">
             <a href="https://github.com/widad-sksn/Tugas-SLV" target="_blank" class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-semibold text-sky-400 hover:text-sky-300 transition">
-              <span>Buka GitHub</span>
+              <span data-i18n="btn.openGithub">Buka GitHub</span>
               <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
           </div>
@@ -1248,7 +1290,7 @@
             <!-- Card Body -->
             <div class="p-2.5 sm:p-4 lg:p-5">
               <h3 class="font-bold text-xs sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">WireGuard VPN Gateway</h3>
-              <p class="text-[10px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mb-1.5 sm:mb-2.5">
+              <p data-i18n="p4.desc" class="text-[10px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mb-1.5 sm:mb-2.5">
                 Implementasi terowongan VPN WireGuard performa tinggi dengan enkripsi modern ChaCha20-Poly1305 untuk interkoneksi aman antar jaringan kampus dan remote site.
               </p>
               <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-1 sm:mb-3">
@@ -1262,7 +1304,7 @@
           <!-- Card Actions -->
           <div class="px-2.5 pb-2.5 sm:px-4 sm:pb-4">
             <a href="https://github.com/widad-sksn" target="_blank" class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-semibold text-sky-400 hover:text-sky-300 transition">
-              <span>Profil GitHub</span>
+              <span data-i18n="btn.profileGithub">Profil GitHub</span>
               <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
           </div>
@@ -1287,7 +1329,7 @@
             <!-- Card Body -->
             <div class="p-2.5 sm:p-4 lg:p-5">
               <h3 class="font-bold text-xs sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">Proxmox HA Cluster</h3>
-              <p class="text-[10px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mb-1.5 sm:mb-2.5">
+              <p data-i18n="p5.desc" class="text-[10px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mb-1.5 sm:mb-2.5">
                 Penyusunan klaster virtualisasi multi-node dengan zero-downtime live migration, sinkronisasi storage ZFS/NFS, dan pemantauan resource server terintegrasi.
               </p>
               <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-1 sm:mb-3">
@@ -1301,7 +1343,7 @@
           <!-- Card Actions -->
           <div class="px-2.5 pb-2.5 sm:px-4 sm:pb-4">
             <a href="https://github.com/widad-sksn" target="_blank" class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-semibold text-sky-400 hover:text-sky-300 transition">
-              <span>Profil GitHub</span>
+              <span data-i18n="btn.profileGithub">Profil GitHub</span>
               <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
           </div>
@@ -1326,7 +1368,7 @@
             <!-- Card Body -->
             <div class="p-2.5 sm:p-4 lg:p-5">
               <h3 class="font-bold text-xs sm:text-base lg:text-lg text-white mb-1 typewrite-on-scroll">Reverse Proxy Layer</h3>
-              <p class="text-[10px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mb-1.5 sm:mb-2.5">
+              <p data-i18n="p6.desc" class="text-[10px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mb-1.5 sm:mb-2.5">
                 Gerbang proxy terpusat dengan automated Let's Encrypt certificate renewal, HTTP/2 multiplexing, rate-limiting, dan proteksi header keamanan OWASP.
               </p>
               <div class="flex flex-wrap gap-1 sm:gap-1.5 mb-1 sm:mb-3">
@@ -1340,7 +1382,7 @@
           <!-- Card Actions -->
           <div class="px-2.5 pb-2.5 sm:px-4 sm:pb-4">
             <a href="https://github.com/widad-sksn" target="_blank" class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-semibold text-sky-400 hover:text-sky-300 transition">
-              <span>Profil GitHub</span>
+              <span data-i18n="btn.profileGithub">Profil GitHub</span>
               <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </a>
           </div>
@@ -1355,9 +1397,9 @@
   <section id="pengalaman" class="relative z-10 pt-10 pb-10 lg:pt-14 lg:pb-14">
     <div class="container">
       <div class="w-full px-4 mb-5 sm:mb-7 lg:mb-8 text-center">
-        <h4 class="font-bold text-[11px] sm:text-sm uppercase tracking-widest text-sky-400 mb-1">Pengalaman</h4>
-        <h2 class="font-extrabold text-white text-xl sm:text-3xl lg:text-5xl">Rekam Jejak &amp; Kontribusi</h2>
-        <p class="font-normal text-slate-300 text-xs sm:text-base lg:text-lg max-w-xl mx-auto mt-1.5 sm:mt-2">
+        <h4 data-i18n="exp.eyebrow" class="font-bold text-[11px] sm:text-sm uppercase tracking-widest text-sky-400 mb-1">Pengalaman</h4>
+        <h2 data-i18n="exp.title" class="font-extrabold text-white text-xl sm:text-3xl lg:text-5xl">Rekam Jejak &amp; Kontribusi</h2>
+        <p data-i18n="exp.subtitle" class="font-normal text-slate-300 text-xs sm:text-base lg:text-lg max-w-xl mx-auto mt-1.5 sm:mt-2">
           Peran aktif dalam akademik kampus dan implementasi infrastruktur teknologi informasi.
         </p>
       </div>
@@ -1370,13 +1412,13 @@
             <div>
               <span class="text-[9px] sm:text-xs uppercase font-bold text-sky-400 tracking-wider block">Universitas 'Aisyiyah Yogyakarta (UNISA)</span>
               <h3 class="text-xs sm:text-lg lg:text-xl font-bold text-white mt-0.5 typewrite-on-scroll">Network &amp; Systems Infrastructure Engineer</h3>
-              <p class="text-sky-300 font-medium text-[10px] sm:text-xs">Laboratorium Komputer &amp; Jaringan</p>
+              <p data-i18n="exp1.roleSub" class="text-sky-300 font-medium text-[10px] sm:text-xs">Laboratorium Komputer &amp; Jaringan</p>
             </div>
-            <span class="text-[8px] sm:text-[10px] font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/30 py-0.5 px-1.5 sm:px-2 rounded-md">
+            <span data-i18n="exp1.badge" class="text-[8px] sm:text-[10px] font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/30 py-0.5 px-1.5 sm:px-2 rounded-md">
               Infrastruktur Jaringan
             </span>
           </div>
-          <p class="text-slate-300 text-[11px] sm:text-sm lg:text-base leading-snug sm:leading-relaxed">
+          <p data-i18n-html="exp1.desc" class="text-slate-300 text-[11px] sm:text-sm lg:text-base leading-snug sm:leading-relaxed">
             Bertanggung jawab dalam pengelolaan dan pemeliharaan infrastruktur jaringan laboratorium, administrasi server Linux (routing, firewall, subnetting, VLAN), konfigurasi virtualisasi klaster Proxmox VE, serta merancang tools utilitas jaringan seperti <a href="https://labrisetti.unisayogya.ac.id/" target="_blank" class="text-[10px] sm:text-xs bg-slate-900 text-sky-400 hover:text-sky-300 px-1 sm:px-1.5 py-0.5 rounded border border-sky-500/40 underline font-mono">Sistem Lab PSTI (absen-lab)</a> untuk pencatatan presensi terverifikasi gateway lokal.
           </p>
         </div>
@@ -1389,11 +1431,11 @@
               <h3 class="text-xs sm:text-lg lg:text-xl font-bold text-white mt-0.5 typewrite-on-scroll">PT LifeMedia</h3>
               <p class="text-sky-400 font-medium text-[10px] sm:text-xs">Engineering Onsite UNISA</p>
             </div>
-            <span class="text-[8px] sm:text-[10px] font-semibold bg-slate-900 text-slate-300 border border-slate-700 py-0.5 px-1.5 sm:px-2 rounded-md">
+            <span data-i18n="exp2.badge" class="text-[8px] sm:text-[10px] font-semibold bg-slate-900 text-slate-300 border border-slate-700 py-0.5 px-1.5 sm:px-2 rounded-md">
               Pengalaman Industri
             </span>
           </div>
-          <p class="text-slate-300 text-[11px] sm:text-sm lg:text-base leading-snug sm:leading-relaxed">
+          <p data-i18n="exp2.desc" class="text-slate-300 text-[11px] sm:text-sm lg:text-base leading-snug sm:leading-relaxed">
             Bertanggung jawab sebagai Onsite Engineer untuk infrastruktur jaringan ISP PT LifeMedia di lingkungan kampus UNISA: menangani pemeliharaan perangkat distribusi, monitoring throughput &amp; uptime koneksi, instalasi serta troubleshooting perangkat jaringan (MikroTik, switch, access point), dan memastikan reliabilitas layanan internet bagi civitas akademika.
           </p>
         </div>
@@ -1406,11 +1448,11 @@
               <h3 class="text-xs sm:text-lg lg:text-xl font-bold text-white mt-0.5 typewrite-on-scroll">Independent IT &amp; DevOps Consultant</h3>
               <p class="text-sky-400 font-medium text-[10px] sm:text-xs">Network &amp; Security Implementation</p>
             </div>
-            <span class="text-[8px] sm:text-[10px] font-semibold bg-slate-900 text-slate-300 border border-slate-700 py-0.5 px-1.5 sm:px-2 rounded-md">
+            <span data-i18n="exp3.badge" class="text-[8px] sm:text-[10px] font-semibold bg-slate-900 text-slate-300 border border-slate-700 py-0.5 px-1.5 sm:px-2 rounded-md">
               Proyek Klien
             </span>
           </div>
-          <p class="text-slate-300 text-[11px] sm:text-sm lg:text-base leading-snug sm:leading-relaxed">
+          <p data-i18n="exp3.desc" class="text-slate-300 text-[11px] sm:text-sm lg:text-base leading-snug sm:leading-relaxed">
             Menyediakan jasa perancangan tunnel VPN WireGuard site-to-site terenkripsi, instalasi klaster Proxmox VE, konfigurasi Nginx reverse proxy, dan audit keamanan firewall Linux.
           </p>
         </div>
@@ -1424,9 +1466,9 @@
   <section id="contact" class="relative z-10 pt-10 pb-10 lg:pt-14 lg:pb-14 bg-slate-900/80 border-t border-slate-800/80">
     <div class="container">
       <div class="w-full px-4 mb-5 sm:mb-6 text-center">
-        <h4 class="font-bold text-xs uppercase tracking-widest text-sky-400 mb-1">Kontak</h4>
-        <h2 class="font-extrabold text-white text-xl sm:text-2xl lg:text-3xl">Hubungi Saya</h2>
-        <p class="font-normal text-slate-300 text-xs sm:text-sm max-w-md mx-auto mt-1.5">
+        <h4 data-i18n="contact.eyebrow" class="font-bold text-xs uppercase tracking-widest text-sky-400 mb-1">Kontak</h4>
+        <h2 data-i18n="contact.title" class="font-extrabold text-white text-xl sm:text-2xl lg:text-3xl">Hubungi Saya</h2>
+        <p data-i18n="contact.subtitle" class="font-normal text-slate-300 text-xs sm:text-sm max-w-md mx-auto mt-1.5">
           Tertarik mendiskusikan arsitektur jaringan, sistem laboratorium, atau peluang kolaborasi? Kirimkan pesan di bawah ini.
         </p>
       </div>
@@ -1445,20 +1487,20 @@
       </div>
 
       <!-- Modern Dark Form (Compact & Neat) -->
-      <form id="contact-form" onsubmit="event.preventDefault(); alert('Terima kasih! Pesan Anda telah diterima.'); this.reset();" class="max-w-md mx-auto bg-slate-800/90 border border-slate-700/80 rounded-xl p-4 sm:p-6 card-hover-glow shadow-xl">
+      <form id="contact-form" class="max-w-md mx-auto bg-slate-800/90 border border-slate-700/80 rounded-xl p-4 sm:p-6 card-hover-glow shadow-xl">
         <div class="mb-3">
-          <label for="name" class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap</label>
-          <input type="text" id="name" required placeholder="Masukkan nama Anda" class="w-full bg-slate-900 border border-slate-700 text-white px-3 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 transition">
+          <label for="name" data-i18n="contact.nameLabel" class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap</label>
+          <input type="text" id="name" required data-i18n-placeholder="contact.namePlaceholder" placeholder="Masukkan nama Anda" class="w-full bg-slate-900 border border-slate-700 text-white px-3 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 transition">
         </div>
         <div class="mb-3">
-          <label for="email" class="block text-xs font-semibold text-slate-300 mb-1">Alamat Email</label>
-          <input type="email" id="email" required placeholder="nama@domain.com" class="w-full bg-slate-900 border border-slate-700 text-white px-3 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 transition">
+          <label for="email" data-i18n="contact.emailLabel" class="block text-xs font-semibold text-slate-300 mb-1">Alamat Email</label>
+          <input type="email" id="email" required data-i18n-placeholder="contact.emailPlaceholder" placeholder="nama@domain.com" class="w-full bg-slate-900 border border-slate-700 text-white px-3 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 transition">
         </div>
         <div class="mb-4">
-          <label for="message" class="block text-xs font-semibold text-slate-300 mb-1">Pesan Anda</label>
-          <textarea id="message" required placeholder="Tuliskan pesan atau topik diskusi di sini..." class="w-full bg-slate-900 border border-slate-700 text-white px-3 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 h-20 sm:h-24 transition"></textarea>
+          <label for="message" data-i18n="contact.msgLabel" class="block text-xs font-semibold text-slate-300 mb-1">Pesan Anda</label>
+          <textarea id="message" required data-i18n-placeholder="contact.msgPlaceholder" placeholder="Tuliskan pesan atau topik diskusi di sini..." class="w-full bg-slate-900 border border-slate-700 text-white px-3 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20 h-20 sm:h-24 transition"></textarea>
         </div>
-        <button type="submit" class="w-full text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 py-2 sm:py-2.5 px-5 rounded-lg shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition duration-300">
+        <button type="submit" data-i18n="contact.submit" class="w-full text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 py-2 sm:py-2.5 px-5 rounded-lg shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition duration-300">
           Kirim Pesan
         </button>
       </form>
@@ -1476,9 +1518,9 @@
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-5 text-xs sm:text-sm text-slate-400">
-          <a href="#home" class="hover:text-sky-400 transition">Beranda</a>
+          <a href="#home" data-i18n="nav.home" class="hover:text-sky-400 transition">Beranda</a>
           <a href="#portfolio" class="hover:text-sky-400 transition">Portfolio</a>
-          <a href="#contact" class="hover:text-sky-400 transition">Kontak</a>
+          <a href="#contact" data-i18n="nav.contact" class="hover:text-sky-400 transition">Kontak</a>
           <a href="https://github.com/widad-sksn" target="_blank" class="inline-flex items-center gap-1.5 text-slate-300 hover:text-sky-400 transition">
             <svg width="15" height="15" class="fill-current" viewBox="0 0 30 30"><path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"></path></svg>
             <span>github.com/widad-sksn</span>
@@ -1639,6 +1681,9 @@
           const fullText = el.getAttribute('data-type-text') || el.textContent.trim();
           if (!fullText) return;
 
+          const token = String(Date.now() + Math.random());
+          el.dataset.typeToken = token;
+
           // Lock initial height so cards and surrounding elements don't jump or collapse
           const naturalHeight = el.offsetHeight;
           if (naturalHeight > 0) {
@@ -1652,6 +1697,7 @@
 
           let i = 0;
           function typeNextChar() {
+            if (el.dataset.typeToken !== token) return;
             if (i < fullText.length) {
               const char = fullText.charAt(i);
               textSpan.textContent += char;
@@ -1671,9 +1717,11 @@
             } else {
               // Graceful completion: linger then fade out cursor cleanly
               setTimeout(() => {
+                if (el.dataset.typeToken !== token) return;
                 if (cursorSpan) {
                   cursorSpan.style.opacity = '0';
                   setTimeout(() => {
+                    if (el.dataset.typeToken !== token) return;
                     cursorSpan.remove();
                     el.style.minHeight = '';
                   }, 300);
@@ -1689,6 +1737,182 @@
         }
       });
     }, { root: null, rootMargin: '0px 0px -40px 0px', threshold: 0.15 });
+
+    // 5. Bilingual Switcher (ID / EN)
+    const translations = {
+      id: {
+        'nav.home': 'Beranda',
+        'nav.about': 'Tentang',
+        'nav.experience': 'Pengalaman',
+        'nav.contact': 'Kontak',
+        'hero.greeting': 'Halo Semua 👋, Saya',
+        'hero.focusPrefix': 'Fokus pada',
+        'hero.desc': 'Merancang infrastruktur jaringan berkinerja tinggi, klaster virtualisasi Proxmox, otomatisasi container Docker, konfigurasi routing & firewall MikroTik, serta implementasi pertahanan keamanan sistem modern.',
+        'hero.ctaContact': 'Hubungi Saya',
+        'hero.ctaProjects': 'Lihat Proyek',
+        'about.eyebrow': 'Tentang Saya',
+        'about.p1': 'Saya adalah praktisi di bidang <strong>Network Engineering, DevOps, dan Cybersecurity</strong> dengan fokus mendalam pada administrasi server Linux, arsitektur jaringan enterprise, klaster virtualisasi High-Availability, serta hardening keamanan sistem komputasi.',
+        'about.p2': 'Dalam operasional harian dan implementasi sistem produksi, saya aktif mengonfigurasi routing terdistribusi MikroTik, VPN terenkripsi WireGuard, virtualisasi Proxmox VE, deployment container Docker, serta otomatisasi backend menggunakan Python dan Laravel.',
+        'about.spec.eyebrow': 'Spesialisasi',
+        'about.spec.title': 'Bidang Kompetensi Inti',
+        'about.spec1.title': 'Sistem Operasi & Server Linux',
+        'about.spec1.desc': 'Ubuntu, Debian, kernel tuning, automation scripting bash, serta manajemen pengguna & hak akses.',
+        'about.spec2.title': 'DevOps & Virtualisasi',
+        'about.spec2.desc': 'Proxmox VE (KVM/LXC), Docker Compose, orkestrasi container, serta pencadangan otomatis.',
+        'about.spec3.desc': 'MikroTik RouterOS, WireGuard VPN tunnel terenkripsi, firewall filter, VLAN tagging, dan traffic routing.',
+        'about.spec4.desc': 'Nginx reverse proxy, automated Let\'s Encrypt SSL, rate limiting, header hardening, serta audit keamanan Linux.',
+        'portfolio.title': 'Koleksi Proyek Unggulan',
+        'portfolio.subtitle': 'Implementasi infrastruktur jaringan, modul server Linux, dan platform digital terintegrasi.',
+        'p1.desc': 'Platform resmi pertukaran informasi & komunikasi Ikatan Mahasiswa Muhammadiyah Korkom UNISA, automasi alur data, berita, dan administrasi organisasi.',
+        'p2.title': 'Sistem Lab PSTI UNISA',
+        'p2.desc': 'Sistem presensi laboratorium jaringan PSTI UNISA berbasis web dengan validasi subnet IP lokal dan pemeriksaan gateway untuk absensi mahasiswa yang terverifikasi dan akurat.',
+        'p3.title': 'Tugas-SLV (Server Linux)',
+        'p3.desc': 'Koleksi skrip otomatisasi konfigurasi server Linux, orkestrasi container Docker, dan dokumentasi provisioning virtual machine untuk lingkungan server.',
+        'p4.desc': 'Implementasi terowongan VPN WireGuard performa tinggi dengan enkripsi modern ChaCha20-Poly1305 untuk interkoneksi aman antar jaringan kampus dan remote site.',
+        'p5.desc': 'Penyusunan klaster virtualisasi multi-node dengan zero-downtime live migration, sinkronisasi storage ZFS/NFS, dan pemantauan resource server terintegrasi.',
+        'p6.desc': 'Gerbang proxy terpusat dengan automated Let\'s Encrypt certificate renewal, HTTP/2 multiplexing, rate-limiting, dan proteksi header keamanan OWASP.',
+        'btn.visitWeb': 'Kunjungi Web',
+        'btn.visitLab': 'Kunjungi Lab',
+        'btn.openGithub': 'Buka GitHub',
+        'btn.profileGithub': 'Profil GitHub',
+        'exp.eyebrow': 'Pengalaman',
+        'exp.title': 'Rekam Jejak & Kontribusi',
+        'exp.subtitle': 'Peran aktif dalam akademik kampus dan implementasi infrastruktur teknologi informasi.',
+        'exp1.roleSub': 'Laboratorium Komputer & Jaringan',
+        'exp1.badge': 'Infrastruktur Jaringan',
+        'exp1.desc': 'Bertanggung jawab dalam pengelolaan dan pemeliharaan infrastruktur jaringan laboratorium, administrasi server Linux (routing, firewall, subnetting, VLAN), konfigurasi virtualisasi klaster Proxmox VE, serta merancang tools utilitas jaringan seperti <a href="https://labrisetti.unisayogya.ac.id/" target="_blank" class="text-[10px] sm:text-xs bg-slate-900 text-sky-400 hover:text-sky-300 px-1 sm:px-1.5 py-0.5 rounded border border-sky-500/40 underline font-mono">Sistem Lab PSTI (absen-lab)</a> untuk pencatatan presensi terverifikasi gateway lokal.',
+        'exp2.badge': 'Pengalaman Industri',
+        'exp2.desc': 'Bertanggung jawab sebagai Onsite Engineer untuk infrastruktur jaringan ISP PT LifeMedia di lingkungan kampus UNISA: menangani pemeliharaan perangkat distribusi, monitoring throughput & uptime koneksi, instalasi serta troubleshooting perangkat jaringan (MikroTik, switch, access point), dan memastikan reliabilitas layanan internet bagi civitas akademika.',
+        'exp3.badge': 'Proyek Klien',
+        'exp3.desc': 'Menyediakan jasa perancangan tunnel VPN WireGuard site-to-site terenkripsi, instalasi klaster Proxmox VE, konfigurasi Nginx reverse proxy, dan audit keamanan firewall Linux.',
+        'contact.eyebrow': 'Kontak',
+        'contact.title': 'Hubungi Saya',
+        'contact.subtitle': 'Tertarik mendiskusikan arsitektur jaringan, sistem laboratorium, atau peluang kolaborasi? Kirimkan pesan di bawah ini.',
+        'contact.nameLabel': 'Nama Lengkap',
+        'contact.namePlaceholder': 'Masukkan nama Anda',
+        'contact.emailLabel': 'Alamat Email',
+        'contact.emailPlaceholder': 'nama@domain.com',
+        'contact.msgLabel': 'Pesan Anda',
+        'contact.msgPlaceholder': 'Tuliskan pesan atau topik diskusi di sini...',
+        'contact.submit': 'Kirim Pesan',
+        'contact.alert': 'Terima kasih! Pesan Anda telah diterima.'
+      },
+      en: {
+        'nav.home': 'Home',
+        'nav.about': 'About',
+        'nav.experience': 'Experience',
+        'nav.contact': 'Contact',
+        'hero.greeting': 'Hello Everyone 👋, I\'m',
+        'hero.focusPrefix': 'Focused on',
+        'hero.desc': 'Designing high-performance network infrastructure, Proxmox virtualization clusters, Docker container automation, MikroTik routing & firewall configurations, and modern system security defenses.',
+        'hero.ctaContact': 'Contact Me',
+        'hero.ctaProjects': 'View Projects',
+        'about.eyebrow': 'About Me',
+        'about.p1': 'I am a practitioner in <strong>Network Engineering, DevOps, and Cybersecurity</strong> with a deep focus on Linux server administration, enterprise network architecture, High-Availability virtualization clusters, and computing system security hardening.',
+        'about.p2': 'In daily operations and production deployments, I actively configure distributed MikroTik routing, encrypted WireGuard VPNs, Proxmox VE virtualization, Docker container deployments, and backend automation using Python and Laravel.',
+        'about.spec.eyebrow': 'Specialization',
+        'about.spec.title': 'Core Areas of Expertise',
+        'about.spec1.title': 'Linux OS & Server Administration',
+        'about.spec1.desc': 'Ubuntu, Debian, kernel tuning, bash automation scripting, and user & access privilege management.',
+        'about.spec2.title': 'DevOps & Virtualization',
+        'about.spec2.desc': 'Proxmox VE (KVM/LXC), Docker Compose, container orchestration, and automated backups.',
+        'about.spec3.desc': 'MikroTik RouterOS, encrypted WireGuard VPN tunnels, firewall filtering, VLAN tagging, and traffic routing.',
+        'about.spec4.desc': 'Nginx reverse proxy, automated Let\'s Encrypt SSL, rate limiting, header hardening, and Linux security auditing.',
+        'portfolio.title': 'Featured Projects',
+        'portfolio.subtitle': 'Implementations of network infrastructure, Linux server modules, and integrated digital platforms.',
+        'p1.desc': 'Official information & communication portal for IMM Korkom UNISA, automating data workflows, news publishing, and organizational administration.',
+        'p2.title': 'PSTI UNISA Lab System',
+        'p2.desc': 'Web-based network lab attendance system for PSTI UNISA featuring local IP subnet validation and gateway verification for accurate student check-ins.',
+        'p3.title': 'Tugas-SLV (Linux Server)',
+        'p3.desc': 'Collection of Linux server configuration automation scripts, Docker container orchestration, and virtual machine provisioning docs for server environments.',
+        'p4.desc': 'High-performance WireGuard VPN tunnel deployment with modern ChaCha20-Poly1305 encryption for secure interconnection between campus networks and remote sites.',
+        'p5.desc': 'Multi-node virtualization cluster architecture with zero-downtime live migration, ZFS/NFS storage replication, and integrated server resource monitoring.',
+        'p6.desc': 'Centralized proxy gateway with automated Let\'s Encrypt certificate renewal, HTTP/2 multiplexing, rate limiting, and OWASP security header protection.',
+        'btn.visitWeb': 'Visit Web',
+        'btn.visitLab': 'Visit Lab',
+        'btn.openGithub': 'Open GitHub',
+        'btn.profileGithub': 'GitHub Profile',
+        'exp.eyebrow': 'Experience',
+        'exp.title': 'Track Record & Contributions',
+        'exp.subtitle': 'Active roles in campus academics and IT infrastructure implementation.',
+        'exp1.roleSub': 'Computer & Network Laboratory',
+        'exp1.badge': 'Network Infrastructure',
+        'exp1.desc': 'Responsible for managing and maintaining laboratory network infrastructure, Linux server administration (routing, firewall, subnetting, VLAN), Proxmox VE cluster virtualization, and building network utility tools such as <a href="https://labrisetti.unisayogya.ac.id/" target="_blank" class="text-[10px] sm:text-xs bg-slate-900 text-sky-400 hover:text-sky-300 px-1 sm:px-1.5 py-0.5 rounded border border-sky-500/40 underline font-mono">PSTI Lab System (absen-lab)</a> for local gateway-verified attendance.',
+        'exp2.badge': 'Industry Experience',
+        'exp2.desc': 'Serving as Onsite Engineer for PT LifeMedia ISP network infrastructure at UNISA campus: handling distribution device maintenance, throughput & uptime monitoring, installation and troubleshooting of network hardware (MikroTik, switches, access points), and ensuring reliable internet service for the academic community.',
+        'exp3.badge': 'Client Projects',
+        'exp3.desc': 'Providing services for encrypted site-to-site WireGuard VPN tunnel design, Proxmox VE cluster setup, Nginx reverse proxy configuration, and Linux firewall security auditing.',
+        'contact.eyebrow': 'Contact',
+        'contact.title': 'Contact Me',
+        'contact.subtitle': 'Interested in discussing network architecture, laboratory systems, or collaboration opportunities? Send a message below.',
+        'contact.nameLabel': 'Full Name',
+        'contact.namePlaceholder': 'Enter your name',
+        'contact.emailLabel': 'Email Address',
+        'contact.emailPlaceholder': 'name@domain.com',
+        'contact.msgLabel': 'Your Message',
+        'contact.msgPlaceholder': 'Write your message or discussion topic here...',
+        'contact.submit': 'Send Message',
+        'contact.alert': 'Thank you! Your message has been received.'
+      }
+    };
+
+    let currentLang = localStorage.getItem('widad-lang') === 'en' ? 'en' : 'id';
+
+    function applyLanguage(lang) {
+      currentLang = lang === 'en' ? 'en' : 'id';
+      localStorage.setItem('widad-lang', currentLang);
+      document.documentElement.lang = currentLang;
+      const dict = translations[currentLang];
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const val = dict[key];
+        if (!val) return;
+        if (el.classList.contains('typewrite-on-scroll')) {
+          el.setAttribute('data-type-text', val);
+          if (el.querySelector('.typed-content')) {
+            el.dataset.typeToken = 'switched';
+            el.textContent = val;
+            el.style.minHeight = '';
+          } else {
+            el.textContent = val;
+          }
+        } else {
+          el.textContent = val;
+        }
+      });
+
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (dict[key]) el.innerHTML = dict[key];
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (dict[key]) el.setAttribute('placeholder', dict[key]);
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === currentLang);
+      });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        applyLanguage(btn.getAttribute('data-lang'));
+      });
+    });
+
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert(translations[currentLang]['contact.alert']);
+        contactForm.reset();
+      });
+    }
+
+    applyLanguage(currentLang);
 
     document.querySelectorAll('.typewrite-on-scroll').forEach(el => {
       el.setAttribute('data-type-text', el.textContent.trim());
